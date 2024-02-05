@@ -7,10 +7,16 @@ public class Grid_System : MonoBehaviour
     private int width;
     private int depth; 
     public float cellSize;
-    public Vector3 GridPosition;
-    public GameObject floorPrefab;
-    public GameObject wallPrefab;
-    public GameObject waterPrefab;
+  
+    public GameObject floorPrefab; // 0
+    public GameObject floor2Prefab; // 1
+    public GameObject wallPrefab;  // 2
+    public GameObject waterPrefab; // 3
+    public GameObject bridgePrefab; // 4
+    public GameObject treePrefab; // 5
+    public GameObject healingPrefab; // 6
+    public GameObject treasurePrefab; // 7
+    public GameObject endPrefab; // 8
 
     private Cell_System[,] grid; // Cell 객체를 저장할 2D 배열
 
@@ -46,14 +52,24 @@ public class Grid_System : MonoBehaviour
                 switch (tileType)
                 {
                     case '0':
-                        prefabToInstantiate = floorPrefab;
+                        prefabToInstantiate = floorPrefab; // 바닥
                         break;
                     case '1':
-                        prefabToInstantiate = wallPrefab;
+                        prefabToInstantiate = floor2Prefab; // 2층
                         break;
                     case '2':
-                        prefabToInstantiate = waterPrefab;
+                        prefabToInstantiate = waterPrefab; // 물
                         break;
+                    case '3':
+                        prefabToInstantiate = wallPrefab; // 벽
+                        break;
+                    case '4':
+                        prefabToInstantiate = treePrefab; // 나무
+                        break;
+                    case '5':
+                        prefabToInstantiate = bridgePrefab; // 다리
+                        break;
+
                 }
 
                 if (prefabToInstantiate != null)
@@ -92,17 +108,14 @@ public class Grid_System : MonoBehaviour
 
     */
 
+
+    /// <summary>
+    /// 시작 위치 그리기
+    /// </summary>
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.blue; // Gizmo 색상 설정
-        for (int x = 0; x < width; x++)
-        {
-            for (int z = 0; z < depth; z++)
-            { // Y 대신 Z를 사용
-                var cellCenter = GridPosition + new Vector3(x, 0, z) * cellSize;
-                Gizmos.DrawWireCube(cellCenter, new Vector3(cellSize, 0, cellSize)); // 셀의 높이를 1칸으로 설정
-            }
-        }
+        Gizmos.DrawWireCube(new Vector3(0,cellSize*0.5f,0), new Vector3(cellSize, cellSize, cellSize));
+
     }
 
 
@@ -113,7 +126,7 @@ public class Grid_System : MonoBehaviour
     private Vector3 GetWorldPosition(int x, int z) 
     {
 
-        return new Vector3(x, 0, z) * cellSize + GridPosition;
+        return new Vector3(x, 0, z) * cellSize;
     }
 
 

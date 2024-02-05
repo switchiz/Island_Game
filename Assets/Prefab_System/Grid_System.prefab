@@ -89,7 +89,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be8943668e22c4b4d941d0346083e02e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 5
-  depth: 5
   cellSize: 0.4
-  GridPosition: {x: -0.2, y: -0.4, z: -0.2}
+  floorPrefab: {fileID: 2303790651989673195, guid: 315e3037d6061204cad190d8fb3728b6, type: 3}
+  wallPrefab: {fileID: 389422324050062235, guid: af9b14d68578c9b40888815de356ea97, type: 3}
+  waterPrefab: {fileID: 9017685638422816556, guid: 1f5ccf76678a0544d88418517f674a4d, type: 3}
+  BridgePrefab: {fileID: 3922719695549160063, guid: 4604c4db612716c4e806b40dbd9006a6, type: 3}
+  TreePrefab: {fileID: 0}
+  HealingPrefab: {fileID: 0}
+  TreasurePrefab: {fileID: 0}
+  EndPrefab: {fileID: 0}
