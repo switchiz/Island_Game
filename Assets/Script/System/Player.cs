@@ -72,11 +72,16 @@ public class Player : MonoBehaviour
     {
         Debug.Log(point);
         transform.position = point;
+        alignPlayer();
+        //Vector3 checki = transform.position;
+        //checki.y += 0.5f;
     }
 
     private void alignPlayer()
     {
         MapObject mapObject;
+
+
 
         Ray ray = new Ray(transform.position, -transform.up);
 
