@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,8 +17,8 @@ public class Camera_view : MonoBehaviour
     public Camera_Option Camera_op;
 
     GameObject player;
-    public float a;
-    public float b;
+    public CinemachineVirtualCamera[] vcams;
+
 
     private void Awake()
     {
@@ -36,13 +37,11 @@ public class Camera_view : MonoBehaviour
         Vector3 PlayerPos = player.transform.position;
         if ( Camera_op == Camera_Option.Chara_view)
         {
-            transform.position = new Vector3(PlayerPos.x, PlayerPos.y + 1, PlayerPos.z - 1);
-            transform.rotation = Quaternion.Euler(40, 0, 0);
+
         }
         else if(Camera_op == Camera_Option.Top_view )
         {
-            transform.position = new Vector3(PlayerPos.x, PlayerPos.y + 2, PlayerPos.z-0.3f);
-            transform.rotation = Quaternion.Euler(80, 0, 0);
+
         }
         else
         {

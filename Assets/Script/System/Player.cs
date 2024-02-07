@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using Unity.VisualScripting;
 using UnityEngine;
+using Color = UnityEngine.Color;
 
 public class Player : MonoBehaviour
 {
@@ -39,7 +41,6 @@ public class Player : MonoBehaviour
     {
         transform.position = new Vector3(x*0.4f, 0.4f, z*0.4f);
         Player_pos = transform.position;
-        alignPlayer();
     }
 
     private void Update()
@@ -55,49 +56,39 @@ public class Player : MonoBehaviour
     private void OnClcik(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit))
-        {
-            MovePlayerTo(hit.point);
-            
-        }
+        alignPlayer(ray);
     }
 
-
-    /// <summary>
-    /// 클릭한곳으로 이동시키는 메서드
-    /// </summary>
-    private void MovePlayerTo(Vector3 point)
+    private void alignPlayer(Ray ray)
     {
-        Debug.Log(point);
-        transform.position = point;
-        alignPlayer();
-        //Vector3 checki = transform.position;
-        //checki.y += 0.5f;
-    }
+        //MapObject mapObject;
 
-    private void alignPlayer()
-    {
-        MapObject mapObject;
-
-
-
-        Ray ray = new Ray(transform.position, -transform.up);
-
-        if (Physics.Raycast(ray, out RaycastHit hitInfo, 2.0f) )
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, 10.0f) )
         {
-            Debug.Log(hitInfo.collider);
-             if (hitInfo.collider.gameObject.CompareTag("Floor_1"))
+            GameObject selectObj = hitInfo.collider.gameObject;
+             if (selectObj.CompareTag("Floor_1"))
             {
-                transform.position = new Vector3(transform.position.x, 0.4f, transform.position.z);
+                transform.position = new Vector3(selectObj.transform.position.x, 0.4f, selectObj.transform.position.z);
+            }
+             else if(selectObj.CompareTag("Floor_Wall"))
+            {
+
             }
              else
             {
-                transform.position = new Vector3(transform.position.x, 0.8f, transform.position.z);
+                transform.position = new Vector3(selectObj.transform.position.x, 0.8f, selectObj.transform.position.z);
             }
 
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Vector3 gizmoCellSize = new Vector3(0.4f, 0.4f, 0.4f);
+        Vector3 playerGridPosition = transform.position;
+
+      
+        
     }
 
 }
