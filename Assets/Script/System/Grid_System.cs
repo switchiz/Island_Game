@@ -71,10 +71,17 @@ public class Grid_System : MonoBehaviour
                         break;
 
                 }
+                
 
                 if (prefabToInstantiate != null)
                 {
                     GameObject tileObj = Instantiate(prefabToInstantiate, position, Quaternion.identity, mapParent.transform);
+                    MapObject tileset = tileObj.GetComponent<MapObject>();
+                    
+                    if (tileObj != null)
+                    {
+                        tileset.SetCellInfo(x, depth - 1 - z); // z값을 반전하여 등록
+                    }
                 }
 
             }

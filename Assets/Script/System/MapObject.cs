@@ -5,12 +5,13 @@ using UnityEngine.UIElements;
 
 public class MapObject : MonoBehaviour
 {
-    public Vector3 cellPosition;
+    public int x, z;
 
     // 오브젝트가 배치될 때 호출되는 메서드
-    public void SetCellInfo(Vector3 position)
+    public void SetCellInfo(int a, int b)
     {
-        cellPosition = position;
+        x = a;
+        z = b;
     }
 
 }

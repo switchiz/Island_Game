@@ -11,9 +11,9 @@ public class Player : MonoBehaviour
     PlayerInput playerinput;
 
     /// <summary>
-    /// 시작 위치 ( x,z )
+    /// 플레이어의 좌표 ( x,z )
     /// </summary>
-    public int x, z;
+    public int playerX, playerZ;
 
     Vector3 Player_pos;
 
@@ -39,7 +39,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        transform.position = new Vector3(x*0.4f, 0.4f, z*0.4f);
+        transform.position = new Vector3(playerX*0.4f, 0.4f, playerZ*0.4f);
         Player_pos = transform.position;
     }
 
@@ -66,9 +66,13 @@ public class Player : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hitInfo, 10.0f) )
         {
             GameObject selectObj = hitInfo.collider.gameObject;
+            MapObject objectkey = selectObj.gameObject.GetComponent<MapObject>();
+            playerX = objectkey.x;
+            playerZ = objectkey.z;
+
              if (selectObj.CompareTag("Floor_1"))
             {
-                transform.position = new Vector3(selectObj.transform.position.x, 0.4f, selectObj.transform.position.z);
+                MoveSet(0.4f);
             }
              else if(selectObj.CompareTag("Floor_Wall"))
             {
@@ -76,10 +80,15 @@ public class Player : MonoBehaviour
             }
              else
             {
-                transform.position = new Vector3(selectObj.transform.position.x, 0.8f, selectObj.transform.position.z);
+                MoveSet(0.8f);
             }
 
         }
+    }
+
+    void MoveSet(float floor)
+    {
+        transform.position = new Vector3(playerX *0.4f, floor,playerZ *0.4f);
     }
 
     private void OnDrawGizmos()
