@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 389422324052325723}
   - component: {fileID: -2545955616783495114}
   - component: {fileID: -58317016403497651}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Grass_Floor_2
   m_TagString: Floor_2
   m_Icon: {fileID: 0}
@@ -98,7 +98,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bb60f39b630eb84ea29ebe22f786f84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cellPosition: {x: 0, y: 0, z: 0}
+  x: 0
+  z: 0
+  height: 0.8
+  available: 1
+  available_move: 0
 --- !u!65 &-58317016403497651
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -171,6 +175,10 @@ PrefabInstance:
     - target: {fileID: 2303790651989673195, guid: ba82f99ae74887d44a018dc3744cf282, type: 3}
       propertyPath: m_Name
       value: Grass_block
+      objectReference: {fileID: 0}
+    - target: {fileID: 2303790651989673195, guid: ba82f99ae74887d44a018dc3744cf282, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
