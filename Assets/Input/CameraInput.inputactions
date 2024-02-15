@@ -1,0 +1,54 @@
+{
+    "name": "CameraInput",
+    "maps": [
+        {
+            "name": "Camera",
+            "id": "09620f85-9ca8-41ee-b6bf-8a6eec7c96b7",
+            "actions": [
+                {
+                    "name": "PlayerView",
+                    "type": "Button",
+                    "id": "a32cd176-a3c4-4ca7-8607-e59ebc4dba92",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "TopView",
+                    "type": "Button",
+                    "id": "00733f89-3d7b-4518-96da-08bcda29cb00",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "20d68fb8-58cf-4bfa-af64-556dc41c75df",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PlayerView",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "699bd3d2-23e3-4c04-a582-31d7322910b5",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TopView",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

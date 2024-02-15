@@ -12,7 +12,10 @@ public class Grid_System : MonoBehaviour
     public GameObject floor2Prefab; // 1
     public GameObject bridgePrefab; // 2
 
-
+    //
+    //
+    //
+    
     public GameObject waterPrefab; // 7
     public GameObject wallPrefab;  // 8
     public GameObject treePrefab; // 9

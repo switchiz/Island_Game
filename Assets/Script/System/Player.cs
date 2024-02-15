@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
 {
     PlayerInput playerinput;
 
+    
+
     /// <summary>
     /// 플레이어의 좌표 ( x,z )
     /// </summary>
@@ -18,6 +20,8 @@ public class Player : MonoBehaviour
 
     Vector3 Player_pos;
 
+    public Action Turn_Action;
+
     MapObject tempCell; // 밟고있던 땅을 기억하기 위한 임시 저장고
 
     private void Awake()
@@ -25,6 +29,7 @@ public class Player : MonoBehaviour
         playerinput = new();
         blockMask = 1 << LayerMask.NameToLayer("MapObj");
 
+        
     }
 
     private void OnEnable()
@@ -84,6 +89,9 @@ public class Player : MonoBehaviour
                 Debug.Log($"이동{objectkey.x},{objectkey.z}");
                 tempCell.available_move = tempCell.available; // 밟고있던 땅 초기화
                 tempCell = objectkey; // 이동전 밟고 있던 땅이 기록됨.
+
+                Turn_Action?.Invoke();
+                
             }
         }
     }

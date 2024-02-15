@@ -1,57 +1,51 @@
 using Cinemachine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using static UnityEditor.Progress;
-
-public enum Camera_Option
-{
-    Chara_view
-  , Top_view 
-  , All_view
-}
-
 public class Camera_view : MonoBehaviour
 {
     [SerializeField]
-    public Camera_Option Camera_op;
-
-    GameObject player;
+    CameraInput camerainputs;
     public CinemachineVirtualCamera[] vcams;
 
 
     private void Awake()
     {
-        Camera_op = Camera_Option.Chara_view;
-        player = GameObject.FindGameObjectWithTag("Player");
+        camerainputs = new();
+        vcams = FindObjectsByType<CinemachineVirtualCamera>(FindObjectsSortMode.None);
+
+
     }
 
-    private void Update()
+
+    private void OnEnable()
     {
-        Player_view();
+        camerainputs.Camera.Enable();
+        camerainputs.Camera.PlayerView.performed += view_Player;
+        camerainputs.Camera.TopView.performed += view_Top;
     }
 
-    void Player_view()
+    private void OnDisable()
     {
 
-        Vector3 PlayerPos = player.transform.position;
-        if ( Camera_op == Camera_Option.Chara_view)
-        {
-
-        }
-        else if(Camera_op == Camera_Option.Top_view )
-        {
-
-        }
-        else
-        {
-            transform.position = new Vector3(PlayerPos.x, PlayerPos.y + 1.5f, PlayerPos.z - 0.5f);
-        }
-
-
-
-
+        camerainputs.Camera.PlayerView.performed -= view_Player;
+        camerainputs.Camera.TopView.performed -= view_Top;
+        camerainputs.Camera.Disable();
     }
 
+    private void view_Top(InputAction.CallbackContext context)
+    {
+        vcams[0].Priority = 5;
+        vcams[1].Priority = 10;
+    }
 
+    private void view_Player(InputAction.CallbackContext context)
+    {
+        vcams[0].Priority = 10;
+        vcams[1].Priority = 5;
+    }
 }
