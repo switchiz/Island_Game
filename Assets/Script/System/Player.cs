@@ -89,9 +89,7 @@ public class Player : MonoBehaviour
                 Debug.Log($"이동{objectkey.x},{objectkey.z}");
                 tempCell.available_move = tempCell.available; // 밟고있던 땅 초기화
                 tempCell = objectkey; // 이동전 밟고 있던 땅이 기록됨.
-
-                Turn_Action?.Invoke();
-                
+                Turn_Action?.Invoke(); // 1턴 진행
             }
         }
     }
@@ -101,6 +99,7 @@ public class Player : MonoBehaviour
         x *= 0.4f;
         z *= 0.4f;
         transform.position = new Vector3(x,y,z);
+
     }
 
 

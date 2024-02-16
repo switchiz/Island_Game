@@ -16,11 +16,23 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    MapObject[] mapObject;
+    public MapObject[] MapObject
+    {
+        get
+        {
+            if(mapObject == null)
+                mapObject = FindObjectsOfType<MapObject>();
+            return mapObject;
+        }
+    }
+
+
 
     protected override void OnInitialize()
     {
         player = FindAnyObjectByType<Player>();
-
+        mapObject = FindObjectsOfType<MapObject>();
     }
 
 
