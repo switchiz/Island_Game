@@ -85,6 +85,8 @@ public class Player : MonoBehaviour
             if (objectkey.Available_move && !(tempCell.x == objectkey.x && tempCell.z == objectkey.z) && Mathf.Abs(tempCell.x-objectkey.x) < 2 && Mathf.Abs(tempCell.z - objectkey.z) < 2 )
             {
                 moveSet(objectkey.x, objectkey.height, objectkey.z); // 이동함
+                playerX = objectkey.x;
+                playerZ = objectkey.z;
                 objectkey.Available_move = false; // 이동한 땅의 move를 false로 만듬
                 //Debug.Log($"이동{objectkey.x},{objectkey.z}");
                 tempCell.Available_move = tempCell.available; // 밟고있던 땅 초기화
@@ -98,7 +100,9 @@ public class Player : MonoBehaviour
     {
         x *= 0.4f;
         z *= 0.4f;
+
         transform.position = new Vector3(x,y,z);
+        
 
     }
 

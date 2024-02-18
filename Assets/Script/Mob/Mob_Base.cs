@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using static UnityEditor.Experimental.GraphView.GraphView;
 using Random = UnityEngine.Random;
@@ -19,7 +20,7 @@ public class Mob_Base : MonoBehaviour
     /// <summary>
     /// 플레이어 발견 ( true면 발견 , false면 미발견 )
     /// </summary>
-    bool player_checked;
+    bool player_checked = true;
 
     /// <summary>
     ///  밟고있던 땅을 기억하기 위한 임시 저장고
@@ -33,9 +34,13 @@ public class Mob_Base : MonoBehaviour
 
     Player player;
 
+    Grid_System grid_sys;
+
     private void Awake()
     {
         Mob_hp = Mob_MaxHp;
+        grid_sys = FindAnyObjectByType<Grid_System>();
+
     }
     private void Start()
     {
@@ -54,10 +59,9 @@ public class Mob_Base : MonoBehaviour
         }
 
         checkMap = GameManager.Instance.MapObject;
-
         player = GameManager.Instance.Player;
-
         player.Turn_Action += Mob_Action;
+        grid_sys = FindAnyObjectByType<Grid_System>();
     }
 
     /// <summary>
@@ -65,17 +69,15 @@ public class Mob_Base : MonoBehaviour
     /// </summary>
     private void Mob_Action()
     {
-        
-        
         if ( !player_checked ) // 플레이어를 발견하지 못했을때 행동
         {
             randomBlockSelect();
         }
-
+        else
+        {
+            MoveTo( new Vector2Int(Mob_x, Mob_z), new Vector2Int(player.playerX, player.playerZ) );
+        }
     }
-
-
-
 
     private void randomBlockSelect() // 주위 8칸중 1칸을 선택, 벽이라면 재시도
     {
@@ -118,12 +120,24 @@ public class Mob_Base : MonoBehaviour
         tempCell = obj; // 현재 밟고 있는 땅이 tempCell에 기록됨.
     }
 
+    public void MoveTo(Vector2Int start, Vector2Int end)
+    {
+        Debug.Log($"{start},{end},{grid_sys}");
+
+        List<Node> path = grid_sys.FindPath(start, end); // 최적 경로 계산
+        // FollowPath(path); // 경로 따라 이동
+    }
+
+    private void FollowPath(List<Node> path)
+    {
+        foreach (Node node in path)
+        {
+            // moveSet();
+
+            //void moveSet(object);
+            // A 오브젝트를 node의 위치로 이동
 
 
-
-
-
-
-
-
+        }
+    }
 }

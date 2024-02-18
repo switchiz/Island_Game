@@ -10,7 +10,11 @@ public class Node
     public int hCost;
     public int fCost { get { return gCost + hCost; } }
 
-    public MapObject parentMapObject;
+    public Node parentNode;
+
+    public int gridX, gridZ;
+
+    //public MapObject parentMapObject;
 
     /// <summary>
     /// true면 이동가능, false면 이동불가 ( 상태에 따라 변경 )
@@ -30,11 +34,13 @@ public class Node
         available_move = _move;
         worldPosition = _worldPos;
         
+        gridX = _worldPos.x;
+        gridZ = _worldPos.y;
     }
 
     public void SetMoveNode(bool _move )
     {
         available_move = _move;
-        Debug.Log($"{worldPosition},{available_move}");
+        //Debug.Log($"{worldPosition},{available_move}");
     }
 }
