@@ -1,23 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Cell_System : MonoBehaviour
 {
-    public Vector3Int Position { get; private set; } // À§Ä¡
-    public GameObject Occupant { get; set; } // ¼¿¿¡ À§Ä¡ÇÑ °´Ã¼
+    public Vector2Int worldPosition;
+    public bool move_available;
+    public int gCost;
+    public int hCost;
+    public int fCost { get { return gCost + hCost; } }
+    public Node parentNode;
 
 
-    /// <summary>
-    /// ¼¿ »ý¼º
-    /// </summary>
-    /// <param name="x"></param>
-    /// <param name="y"></param>
-    /// <param name="type"></param>
-    public Cell_System(int x, int z)
+
+    public Cell_System(bool _move, Vector2Int _worldPosition)
     {
-        Position = new Vector3Int(x, z);
-
+        move_available = _move;
+        worldPosition = _worldPosition;
     }
 
 }

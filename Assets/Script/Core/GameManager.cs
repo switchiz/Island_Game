@@ -17,15 +17,21 @@ public class GameManager : Singleton<GameManager>
     }
 
     MapObject[] mapObject;
+    /// <summary>
+    /// 오른쪽 아래 칸부터 순서대로 등록된다. ( x좌표 끝부터 0까지, 그후 z는 0부터 1씩 상승 )
+    /// </summary>
     public MapObject[] MapObject
     {
         get
         {
             if(mapObject == null)
-                mapObject = FindObjectsOfType<MapObject>();
+            mapObject = FindObjectsOfType<MapObject>();
             return mapObject;
         }
     }
+
+
+
 
 
 
@@ -33,6 +39,7 @@ public class GameManager : Singleton<GameManager>
     {
         player = FindAnyObjectByType<Player>();
         mapObject = FindObjectsOfType<MapObject>();
+
     }
 
 

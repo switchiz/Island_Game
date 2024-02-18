@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using System.Drawing;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 using Color = UnityEngine.Color;
 
 public class Player : MonoBehaviour
 {
     PlayerInput playerinput;
 
-    
 
     /// <summary>
     /// 플레이어의 좌표 ( x,z )
@@ -59,7 +59,7 @@ public class Player : MonoBehaviour
         {
             GameObject selectObj = hitInfo.collider.gameObject;
             tempCell = selectObj.gameObject.GetComponent<MapObject>();
-            tempCell.available_move = false;
+            tempCell.Available_move = false;
         }
     }
 
@@ -82,12 +82,12 @@ public class Player : MonoBehaviour
             MapObject objectkey = selectObj.gameObject.GetComponent<MapObject>();
 
 
-            if (objectkey.available_move && !(tempCell.x == objectkey.x && tempCell.z == objectkey.z) && Mathf.Abs(tempCell.x-objectkey.x) < 2 && Mathf.Abs(tempCell.z - objectkey.z) < 2 )
+            if (objectkey.Available_move && !(tempCell.x == objectkey.x && tempCell.z == objectkey.z) && Mathf.Abs(tempCell.x-objectkey.x) < 2 && Mathf.Abs(tempCell.z - objectkey.z) < 2 )
             {
                 moveSet(objectkey.x, objectkey.height, objectkey.z); // 이동함
-                objectkey.available_move = false; // 이동한 땅의 move를 false로 만듬
-                Debug.Log($"이동{objectkey.x},{objectkey.z}");
-                tempCell.available_move = tempCell.available; // 밟고있던 땅 초기화
+                objectkey.Available_move = false; // 이동한 땅의 move를 false로 만듬
+                //Debug.Log($"이동{objectkey.x},{objectkey.z}");
+                tempCell.Available_move = tempCell.available; // 밟고있던 땅 초기화
                 tempCell = objectkey; // 이동전 밟고 있던 땅이 기록됨.
                 Turn_Action?.Invoke(); // 1턴 진행
             }

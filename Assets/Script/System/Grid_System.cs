@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Grid_System : MonoBehaviour
@@ -21,7 +22,7 @@ public class Grid_System : MonoBehaviour
     public GameObject treePrefab; // 9
 
 
-    private Cell_System[,] grid; // Cell 객체를 저장할 2D 배열
+    public Node[,] grid; // 맵오브젝트(셀) 노드를 저장할 2D 배열
 
     private void Awake()
     {
@@ -38,8 +39,10 @@ public class Grid_System : MonoBehaviour
         }
 
         string[] lines = mapData.text.Split('\n');
-        int depth = lines.Length;
-        int width = lines[0].Length;
+        depth = lines.Length;
+        width = lines[0].Length;
+
+        grid = new Node[width, depth];
 
         GameObject mapParent = new GameObject("Map");
 
@@ -84,7 +87,10 @@ public class Grid_System : MonoBehaviour
                     
                     if (tileObj != null)
                     {
-                        tileset.SetCellInfo(x, depth - 1 - z); // z값을 반전하여 등록
+                        tileset.SetPos(x, depth - 1 - z); // z값을 반전하여 등록
+
+                        grid[x, depth - 1 - z] = new Node(tileset.available_move, new Vector2Int(x, depth - 1 - z));
+                        //Debug.Log($"{grid[x, depth - 1 - z].available_move},{x},{depth - 1 - z}");
                     }
                 }
 
@@ -92,9 +98,18 @@ public class Grid_System : MonoBehaviour
         }
     }
 
+    
 
 
-
+    public Node GetNode(int x, int z)
+    {
+        if (x >= 0 && x < width && z >= 0 && z < depth)
+        {
+            return grid[x, z];
+        }
+        Debug.Log("not ok");
+        return null; // 잘못 적었으면 null로 내보냄.
+    }
 
     /// <summary>
     /// 시작 위치 그리기

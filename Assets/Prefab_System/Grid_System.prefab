@@ -1,49 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &786681036705641516
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6536772816360448548}
-  - component: {fileID: 2089436242602081750}
-  m_Layer: 0
-  m_Name: Cell_System
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6536772816360448548
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 786681036705641516}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3610789775721990846}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2089436242602081750
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 786681036705641516}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6263ae7ab4fe664781b23a9facd1379, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7509892860502221635
 GameObject:
   m_ObjectHideFlags: 0
@@ -73,8 +29,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 6536772816360448548}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4568903699231034656
@@ -92,10 +47,7 @@ MonoBehaviour:
   cellSize: 0.4
   floorPrefab: {fileID: 2303790651989673195, guid: 315e3037d6061204cad190d8fb3728b6, type: 3}
   floor2Prefab: {fileID: 389422324050062235, guid: af9b14d68578c9b40888815de356ea97, type: 3}
-  wallPrefab: {fileID: 389422324050062235, guid: 3c612f91e586bca4a80fc5fcb445b37a, type: 3}
-  waterPrefab: {fileID: 9017685638422816556, guid: 1f5ccf76678a0544d88418517f674a4d, type: 3}
   bridgePrefab: {fileID: 3922719695549160063, guid: 4604c4db612716c4e806b40dbd9006a6, type: 3}
+  waterPrefab: {fileID: 9017685638422816556, guid: 1f5ccf76678a0544d88418517f674a4d, type: 3}
+  wallPrefab: {fileID: 389422324050062235, guid: 3c612f91e586bca4a80fc5fcb445b37a, type: 3}
   treePrefab: {fileID: 2303790651989673195, guid: a4b87fa62bd0ac84eaac2b718a7eaaa5, type: 3}
-  healingPrefab: {fileID: 0}
-  treasurePrefab: {fileID: 0}
-  endPrefab: {fileID: 0}
