@@ -24,21 +24,34 @@ public class GameManager : Singleton<GameManager>
     {
         get
         {
-            if(mapObject == null)
+            if (mapObject == null)
             mapObject = FindObjectsOfType<MapObject>();
+            
             return mapObject;
+
         }
     }
 
+    /*
+    Grid_System grid;
 
-
-
-
+    public Grid_System Grid
+    {
+        get 
+        {
+            if (grid == null)
+                grid = FindAnyObjectByType<Grid_System>();
+            Debug.Log("Grid ok");
+            return grid; 
+        }
+    }
+    */
 
     protected override void OnInitialize()
     {
         player = FindAnyObjectByType<Player>();
         mapObject = FindObjectsOfType<MapObject>();
+        //grid = FindAnyObjectByType<Grid_System>();
 
     }
 

@@ -89,7 +89,6 @@ public class Grid_System : MonoBehaviour
                         tileset.SetPos(x, depth - 1 - z); // z값을 반전하여 등록
 
                         grid[x, depth - 1 - z] = new Node(tileset.available_move, new Vector2Int(x, depth - 1 - z));
-                        //Debug.Log($"{grid[x, depth - 1 - z].available_move},{x},{depth - 1 - z}");
                     }
                 }
 
@@ -132,71 +131,77 @@ public class Grid_System : MonoBehaviour
 
     public List<Node> FindPath(Vector2Int start, Vector2Int end)
     {
-        Debug.Log($"FindPath called with start: {start}, end: {end}");
         Node startNode = grid[start.x, start.y]; //시작 노드 ( 몹 아래 )
         Node endNode = grid[end.x, end.y]; // 도착지 노드 (플레이어)
 
-        List<Node> openSet = new List<Node>();
-        HashSet<Node> closedSet = new HashSet<Node>();
+        List<Node> openSet = new List<Node>(); // 노드가 들어가는 오픈 리스트
+        HashSet<Node> closedSet = new HashSet<Node>(); // 노드가 들어가는 클로즈 리스트
         openSet.Add(startNode); // 시작 노드를 오픈목록에 넣는다.
 
         while (openSet.Count > 0)
         {
             Node currentNode = openSet[0]; // 시작 노드를 선택한다.
 
-            for (int i = 1; i < openSet.Count; i++) // 오픈목록의 배열만큼 반복한다.
+            for (int i = 1; i < openSet.Count; i++) // 시작 노드를 제외한 오픈목록의 배열만큼 반복한다.
             {
-                // F 비용이 낮은 노드, 그중 F 비용이 같다면 H비용이 낮은 노드를 선택
+                // F 비용이 낮은 노드를 고른다 or F 비용이 같다면 H비용이 낮은 노드를 선택한다.
                 if (openSet[i].fCost < currentNode.fCost || (openSet[i].fCost == currentNode.fCost && openSet[i].hCost < currentNode.hCost))
                 {
-                    currentNode = openSet[i];
-                    Debug.Log($"FindPath processing{currentNode}");
+                    currentNode = openSet[i]; // 그 노드는 오픈 목록에 들어간다.
                 }
             }
 
-            openSet.Remove(currentNode);
-            closedSet.Add(currentNode);
+            openSet.Remove(currentNode); // 오픈 목록에서 시작 노드를 삭제한다.
+            closedSet.Add(currentNode); // 시작 노드는 닫힌 목록에 들어간다.
 
-            /*
-            if (currentNode == endNode) // 목적지에 도달했다면 , 경로 재구성 , 도달할 일 없으므로 제외
+            
+            if (currentNode == endNode) // 목적지에 도달했다면 , 경로 재구성
             {
                 return RetracePath(startNode, endNode);
             }
-            */
+            
 
             // 현재 노드의 모든 이웃 노드에 대해 처리
             foreach (Node neighbour in GetNeighbours(currentNode))
             {
-                if (!neighbour.available_move || closedSet.Contains(neighbour))
+                if (!neighbour.available_move || closedSet.Contains(neighbour)) // 네이버 노드가, true가 아니거나 클로즈셋에 있을 경우
                 {
-                    continue;
+                    continue; // 생략
                 }
 
-                int newCostToNeighbour = currentNode.gCost + GetDistance(currentNode, neighbour);
+                int newCostToNeighbour = currentNode.gCost + GetDistance(currentNode, neighbour); // 선택노드의 gCost와 ( 선택노드와 이웃 간의 거리 ) 를 더한다.
 
                 // 새로운 경로가 더 짧거나 이웃 노드가 열린 집합에 아직 없다면, 이웃 노드를 업데이트
                 if (newCostToNeighbour < neighbour.gCost || !openSet.Contains(neighbour))
                 {
-                    neighbour.gCost = newCostToNeighbour;
-                    neighbour.hCost = GetDistance(neighbour, endNode);
-                    neighbour.parentNode = currentNode;
-                    Debug.Log($"FindPath processing{neighbour}");
+                    neighbour.gCost = newCostToNeighbour;               // 이웃 노드의 gCost는 , newCost
+                    neighbour.hCost = GetDistance(neighbour, endNode);  // 이웃 노드의 hCost는 , 이웃노드부터 목적지의 거리
+                    neighbour.parentNode = currentNode;                 // 이웃 노드의 parentNode 는 선택한 노드 (시작점)
 
                     if (!openSet.Contains(neighbour))
                     {
-                        openSet.Add(neighbour);
+                        openSet.Add(neighbour); // 오픈셋에 없다면 넣는다.
+                        
                     }
                 }
             }
+
+            //Debug.Log(openSet.Count);
         }
 
-        return null;
+        // 마지막에 path에 시작 노드(원래위치)를 넣음.
+        // 도착노드에 도착하지 못하는 경우라면 null이 나오는 대신, 가만히 있도록 함.
+        List<Node> path = new List<Node>(); // path는 Node가 담긴 배열
+        path.Add(startNode);
+        return path;
     }
 
     int GetDistance(Node nodeA, Node nodeB)
     {
         int distX = Mathf.Abs(nodeA.worldPosition.x - nodeB.worldPosition.x);
         int distZ = Mathf.Abs(nodeA.worldPosition.y - nodeB.worldPosition.y);
+        //Debug.Log($"distX = {nodeA.gridX}-{nodeB.gridX} , distZ = {nodeA.gridZ}-{nodeB.gridZ} ");
+           
 
         if (distX > distZ)
             return 14 * distZ + 10 * (distX - distZ);
@@ -219,7 +224,8 @@ public class Grid_System : MonoBehaviour
                 int checkY = node.gridZ + y;
 
                 // 그리드 범위를 벗어나지 않는지 확인
-                if (checkX >= 0 && checkX < width && checkY >= 0 && checkY < depth)
+                // checkX 가 0과 같거나 크며, checkX가 width보다 작아야함.
+                if (checkX >= 0 && checkX < width - 1 && checkY >= 0 && checkY < depth)
                 {
                     neighbours.Add(grid[checkX, checkY]);
                 }
@@ -227,6 +233,20 @@ public class Grid_System : MonoBehaviour
         }
 
         return neighbours;
+    }
+
+    private List<Node> RetracePath(Node startNode, Node endNode)
+    {
+        List<Node> path = new List<Node>(); // path는 Node가 담긴 배열
+        Node currentNode = endNode; // 현재 노드 = 목적지 노드
+
+        while (currentNode != startNode)  // 현재 노드가 시작 노드와 같지 않을때 까지 ( 도착할 때 까지 )
+        {
+            path.Add(currentNode); // path에 현재 노드를 넣는다.
+            currentNode = currentNode.parentNode; // 현재 노드 = 현재노드의 부모노드
+        }
+        path.Reverse(); // 경로를 뒤집어 올바른 순서로 만듭니다.
+        return path;
     }
 
 

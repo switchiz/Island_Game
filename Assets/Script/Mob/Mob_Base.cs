@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using static UnityEditor.Experimental.GraphView.GraphView;
@@ -21,6 +22,11 @@ public class Mob_Base : MonoBehaviour
     /// 플레이어 발견 ( true면 발견 , false면 미발견 )
     /// </summary>
     bool player_checked = true;
+
+    /// <summary>
+    /// 플레이어를 발견하는 범위 
+    /// </summary>
+    public float player_insight;
 
     /// <summary>
     ///  밟고있던 땅을 기억하기 위한 임시 저장고
@@ -73,12 +79,16 @@ public class Mob_Base : MonoBehaviour
         {
             randomBlockSelect();
         }
-        else
+        else // 플레이어 발견시 행동
         {
-            MoveTo( new Vector2Int(Mob_x, Mob_z), new Vector2Int(player.playerX, player.playerZ) );
+            MoveTo(new Vector2Int(Mob_x, Mob_z), new Vector2Int(player.playerX, player.playerZ));
         }
+
     }
 
+    /// <summary>
+    /// 플레이어를 발견하지 못했을때, 무작위로 이동하는 메서드
+    /// </summary>
     private void randomBlockSelect() // 주위 8칸중 1칸을 선택, 벽이라면 재시도
     {
         int[] moveBlock = new int[8]; // 8칸 생성
@@ -109,35 +119,71 @@ public class Mob_Base : MonoBehaviour
         }
     }
 
-    void moveSet(MapObject obj) // 몹에서는 이동과 동시에, 이동한 발판을 false로 만듦.
-    {
-        Mob_x = obj.x;
-        Mob_z = obj.z;
-        transform.position = new Vector3(obj.x * 0.4f, obj.height, obj.z * 0.4f);
 
-        obj.Available_move = false; // 이동한 땅의 move를 false로 만듬
-        tempCell.Available_move = tempCell.available; // 이전에 밟고있던 땅 초기화
-        tempCell = obj; // 현재 밟고 있는 땅이 tempCell에 기록됨.
-    }
-
+    /// <summary>
+    /// 플레이어를 추적하는 메서드
+    /// </summary>
+    /// <param name="start"></param>
+    /// <param name="end"></param>
     public void MoveTo(Vector2Int start, Vector2Int end)
     {
-        Debug.Log($"{start},{end},{grid_sys}");
 
         List<Node> path = grid_sys.FindPath(start, end); // 최적 경로 계산
-        // FollowPath(path); // 경로 따라 이동
+        if (path == null)
+        {
+            //Debug.Log("null");
+        }
+
+        for (int i = 0; i < checkMap.Length; i++) //  모든 MapObject 확인
+        {
+            if (checkMap[i].x == path[0].gridX && checkMap[i].z == path[0].gridZ) // i 번째 MapObject의 좌표가 같고 이동가능이라면,
+            {
+                moveSet(checkMap[i]);
+            }
+        }
+
     }
 
-    private void FollowPath(List<Node> path)
+    /// <summary>
+    /// 적을 이동시키는 메서드 / 플레이어가 1칸내라면 공격을 실행한다.
+    /// </summary>
+    /// <param name="obj"></param>
+    void moveSet(MapObject obj) // 몹에서는 이동과 동시에, 이동한 발판을 false로 만듦.
     {
-        foreach (Node node in path)
+        if ( obj.x == player.playerX && obj.z == player.playerZ) // 다음 이동칸에 플레이어가 있다면 공격한다.
         {
-            // moveSet();
-
-            //void moveSet(object);
-            // A 오브젝트를 node의 위치로 이동
-
+            Attack();
 
         }
+        else
+        {
+            
+            Vector3 objDir = obj.transform.position;
+            Vector3 selfDir = transform.position;
+            selfDir.y = 0;
+            Vector3 direction = ( objDir - selfDir );
+            if ( direction != Vector3.zero)
+            {
+                Quaternion lookRotation = Quaternion.LookRotation(direction);
+                transform.rotation = lookRotation;
+            }
+            Mob_x = obj.x;
+            Mob_z = obj.z;
+            transform.position = new Vector3(obj.x * 0.4f, obj.height, obj.z * 0.4f);
+
+            obj.Available_move = false; // 이동한 땅의 move를 false로 만듬
+            tempCell.Available_move = tempCell.available; // 이전에 밟고있던 땅 초기화
+            tempCell = obj; // 현재 밟고 있는 땅이 tempCell에 기록됨.
+        }
+
+    }
+
+    /// <summary>
+    /// 플레이어와 1칸 내라면 공격한다.
+    /// </summary>
+    /// <exception cref="NotImplementedException"></exception>
+    protected virtual void Attack()
+    {
+        Debug.Log("플레이어를 공격하였다.");
     }
 }

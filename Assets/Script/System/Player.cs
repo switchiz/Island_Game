@@ -16,19 +16,31 @@ public class Player : MonoBehaviour
     /// 플레이어의 좌표 ( x,z )
     /// </summary>
     public int playerX, playerZ;
+
+    /// <summary>
+    /// 맵 obj만 나타냄.
+    /// </summary>
     int blockMask;
 
+    /// <summary>
+    /// 플레이어의 위치
+    /// </summary>
     Vector3 Player_pos;
 
+    /// <summary>
+    /// 플레이어가 행동했음을 (1턴이 지났음을) 알리는 델리게이트
+    /// </summary>
     public Action Turn_Action;
 
-    MapObject tempCell; // 밟고있던 땅을 기억하기 위한 임시 저장고
+    /// <summary>
+    /// 플레이어가 할 행동 ( 0 = 이동 // 1~3 = R G B // 4~6 C P Y // 7~9 B , W , Rainbow )
+    /// </summary>
+    int player_Action = 0;
 
     private void Awake()
     {
         playerinput = new();
         blockMask = 1 << LayerMask.NameToLayer("MapObj");
-
         
     }
 
@@ -52,25 +64,29 @@ public class Player : MonoBehaviour
         transform.position = new Vector3(playerX*0.4f, 0.4f, playerZ*0.4f);
         Player_pos = transform.position;
 
-
-
         Ray ray = new Ray(transform.position, Vector3.down); // 시작했을때 null을 피하기위해 시작 땅을 기록함
         if (Physics.Raycast(ray, out RaycastHit hitInfo, 1.0f))
         {
             GameObject selectObj = hitInfo.collider.gameObject;
-            tempCell = selectObj.gameObject.GetComponent<MapObject>();
-            tempCell.Available_move = false;
         }
     }
 
     /// <summary>
-    /// 클릭의 위치를 주는 메서드
+    /// 클릭시, 선택한 블럭에 행동을 하는 메서드 
     /// </summary>
     /// <param name="context"></param>
     private void OnClcik(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
         Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition); // 마우스 포인터 위치
-        movePlayer(mouseRay); // 위치로 이동
+
+        switch(player_Action)
+        {
+            case 0: // 이동 명령
+                movePlayer(mouseRay); 
+                break;
+
+
+        }
     }
 
 
@@ -81,16 +97,12 @@ public class Player : MonoBehaviour
             GameObject selectObj = hitInfo.collider.gameObject;
             MapObject objectkey = selectObj.gameObject.GetComponent<MapObject>();
 
-
-            if (objectkey.Available_move && !(tempCell.x == objectkey.x && tempCell.z == objectkey.z) && Mathf.Abs(tempCell.x-objectkey.x) < 2 && Mathf.Abs(tempCell.z - objectkey.z) < 2 )
+            // 이동가능하며 & 플레이어 자신의 위치는 불가능 & 주위 8칸만 지정가능
+            if (objectkey.Available_move && !(playerX == objectkey.x && playerZ == objectkey.z) && (MathF.Abs(objectkey.x - playerX) <= 1) && (MathF.Abs(objectkey.z - playerZ) <= 1))
             {
                 moveSet(objectkey.x, objectkey.height, objectkey.z); // 이동함
                 playerX = objectkey.x;
                 playerZ = objectkey.z;
-                objectkey.Available_move = false; // 이동한 땅의 move를 false로 만듬
-                //Debug.Log($"이동{objectkey.x},{objectkey.z}");
-                tempCell.Available_move = tempCell.available; // 밟고있던 땅 초기화
-                tempCell = objectkey; // 이동전 밟고 있던 땅이 기록됨.
                 Turn_Action?.Invoke(); // 1턴 진행
             }
         }
@@ -100,10 +112,7 @@ public class Player : MonoBehaviour
     {
         x *= 0.4f;
         z *= 0.4f;
-
         transform.position = new Vector3(x,y,z);
-        
-
     }
 
 
