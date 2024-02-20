@@ -12,10 +12,10 @@ public class Grid_System : MonoBehaviour
     public GameObject floor2Prefab; // 1
     public GameObject bridgePrefab; // 2
 
-    //
-    //
-    //
-    
+    public GameObject flowerPrefab; // 3
+    public GameObject flower2Prefab; // 4
+                                                                   
+
     public GameObject waterPrefab; // 7
     public GameObject wallPrefab;  // 8
     public GameObject treePrefab; // 9
@@ -64,6 +64,12 @@ public class Grid_System : MonoBehaviour
                         break;
                     case '2':
                         prefabToInstantiate = bridgePrefab; // 다리
+                        break;
+                    case '3':
+                        prefabToInstantiate = flowerPrefab; // 다리
+                        break;
+                    case '4':
+                        prefabToInstantiate = flower2Prefab; // 다리
                         break;
                     case '7':
                         prefabToInstantiate = waterPrefab; // 물

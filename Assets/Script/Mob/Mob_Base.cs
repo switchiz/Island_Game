@@ -45,7 +45,8 @@ public class Mob_Base : MonoBehaviour
     private void Awake()
     {
         Mob_hp = Mob_MaxHp;
-        grid_sys = FindAnyObjectByType<Grid_System>();
+        grid_sys = GameManager.Instance.Grid;
+        // grid_sys = FindAnyObjectByType<Grid_System>();
 
     }
     private void Start()
@@ -67,7 +68,6 @@ public class Mob_Base : MonoBehaviour
         checkMap = GameManager.Instance.MapObject;
         player = GameManager.Instance.Player;
         player.Turn_Action += Mob_Action;
-        grid_sys = FindAnyObjectByType<Grid_System>();
     }
 
     /// <summary>

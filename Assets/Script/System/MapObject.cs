@@ -43,7 +43,7 @@ public class MapObject : MonoBehaviour
 
     private void Awake()
     {
-        grid = FindAnyObjectByType<Grid_System>(); // 추후 게임매니저에 넣어야함. 지금은 뭔 오류있는지 안됨.
+        grid = GameManager.Instance.Grid;
         available_move = available;
         //Debug.Log($"ok {Available_move},{available_move}");
     }

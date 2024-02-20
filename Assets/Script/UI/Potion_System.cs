@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Potion_System : MonoBehaviour
@@ -17,46 +18,58 @@ public class Potion_System : MonoBehaviour
         Cyan = Green | Blue ,    // 0000 0110 G + B
         Purple = Red | Blue,     // 0000 0101 R + B
         Yellow = Red | Green,    // 0000 0011 R + G
-        //Black = 16,     // 0001 0000
-        //White = 32,     // 0010 0000
-        //RainBow = 64    // 0100 0000
+        Black = 16,     // 0001 0000
+        White = 32,     // 0010 0000
+        RainBow = 64    // 0100 0000
     }
 
     /// <summary>
     /// 첫번째 선택을 저장하는 변수
     /// </summary>
-    PointerType temp_potion;
+    PotionType temp_potion;
 
 
     private void Awake()
     {
         player = GameManager.Instance.Player;
+        // 켜기 |= 끄기 &=
     }
 
-    void select_potion(PointerType potion)
+    void select_potion(PotionType potion)
     {
-        if (temp_potion == 0)
+        if ( potion < PotionType.Black ) // 포션이 상급이 아니라면
         {
-            temp_potion = potion;
+            if (temp_potion == 0) // 포션이 없다면
+            {
+                temp_potion = potion; // temp에 포션을 저장한다.
+            }
+            else // 있다면
+            {
+                temp_potion |= potion;  // temp 포션을 더한다.
+                GivePotion(temp_potion);
+                temp_potion = 0;
+            }
         }
-        else
-        {
-            temp_potion |= potion;  // 켜기 |= 끄기 &=
-            GivePotion( (PotionType)temp_potion ); 
-        }
-
     }
 
     void GivePotion(PotionType type)
     {
-        
-
         switch(type)
         {
             case PotionType.Cyan: break;
             case PotionType.Purple: break;
             case PotionType.Yellow: break;
-            case PotionType: break;
+
+            default:
+                if (type >= PotionType.Black)        // 제작한 포션이 상급 포션이라면
+                {
+                    break; 
+                }
+                else                                // 제작한 포션이 조합법에 없다면
+                { 
+                    temp_potion = 0; // 조합 초기화
+                    break;
+                }
         }
 
     }

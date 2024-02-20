@@ -16,6 +16,19 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    Potion_System potion;
+    public Potion_System Potion
+    {
+        get
+        {
+
+            if (potion == null)
+                Debug.Log("ok");
+                potion = FindAnyObjectByType<Potion_System>();
+            return potion;
+        }
+    }
+
     MapObject[] mapObject;
     /// <summary>
     /// 오른쪽 아래 칸부터 순서대로 등록된다. ( x좌표 끝부터 0까지, 그후 z는 0부터 1씩 상승 )
@@ -32,7 +45,6 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    /*
     Grid_System grid;
 
     public Grid_System Grid
@@ -45,13 +57,14 @@ public class GameManager : Singleton<GameManager>
             return grid; 
         }
     }
-    */
+
 
     protected override void OnInitialize()
     {
         player = FindAnyObjectByType<Player>();
+        potion = FindAnyObjectByType<Potion_System>();
         mapObject = FindObjectsOfType<MapObject>();
-        //grid = FindAnyObjectByType<Grid_System>();
+        grid = FindAnyObjectByType<Grid_System>();
 
     }
 

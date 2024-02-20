@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6531333834469964135}
   - component: {fileID: 4524204321749684371}
   - component: {fileID: 317366227648649805}
+  - component: {fileID: 8019585286530745672}
   m_Layer: 5
   m_Name: Purple_Potion
   m_TagString: Untagged
@@ -75,6 +76,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8019585286530745672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 996779020192622585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 416a61ca308969043ad2acb9e8e5ad9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1229417222936152436
 GameObject:
   m_ObjectHideFlags: 0
@@ -161,6 +174,7 @@ GameObject:
   - component: {fileID: 6652610178599261025}
   - component: {fileID: 1916124941721933074}
   - component: {fileID: 5336664185976796278}
+  - component: {fileID: 5082321531177457509}
   m_Layer: 5
   m_Name: Yellow_Potion
   m_TagString: Untagged
@@ -225,6 +239,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5082321531177457509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1489089132135295179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 416a61ca308969043ad2acb9e8e5ad9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1742978389654254175
 GameObject:
   m_ObjectHideFlags: 0
@@ -236,6 +262,7 @@ GameObject:
   - component: {fileID: 2371579011702365716}
   - component: {fileID: 6885009374478050024}
   - component: {fileID: 6102037394973086737}
+  - component: {fileID: 6988734001223712976}
   m_Layer: 5
   m_Name: Red_Potion
   m_TagString: Untagged
@@ -300,6 +327,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6988734001223712976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1742978389654254175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 416a61ca308969043ad2acb9e8e5ad9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1943572558192519875
 GameObject:
   m_ObjectHideFlags: 0
@@ -312,7 +351,7 @@ GameObject:
   - component: {fileID: 1693303306363205500}
   - component: {fileID: 1325975659267988930}
   m_Layer: 5
-  m_Name: Black_Potion
+  m_Name: White_Potion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -386,6 +425,7 @@ GameObject:
   - component: {fileID: 5653161047076272514}
   - component: {fileID: 7329596486194990145}
   - component: {fileID: 8358772372999038532}
+  - component: {fileID: 2310481049478634071}
   m_Layer: 5
   m_Name: Blue_Potion
   m_TagString: Untagged
@@ -450,6 +490,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2310481049478634071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3256583110387138427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 416a61ca308969043ad2acb9e8e5ad9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4063984440950326570
 GameObject:
   m_ObjectHideFlags: 0
@@ -459,6 +511,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2861182654321583426}
+  - component: {fileID: 4261887511947544255}
   m_Layer: 5
   m_Name: Potion
   m_TagString: Untagged
@@ -494,6 +547,18 @@ RectTransform:
   m_AnchoredPosition: {x: -50, y: -50}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &4261887511947544255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4063984440950326570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 740d7ca25374bbe459177b4f1b35e278, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4305441023449029176
 GameObject:
   m_ObjectHideFlags: 0
@@ -608,6 +673,7 @@ GameObject:
   - component: {fileID: 2651470571709758212}
   - component: {fileID: 7563263473127353878}
   - component: {fileID: 7607273173603566024}
+  - component: {fileID: 5023479494786147979}
   m_Layer: 5
   m_Name: Green_Potion
   m_TagString: Untagged
@@ -672,6 +738,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5023479494786147979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4832236998186836484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 416a61ca308969043ad2acb9e8e5ad9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6606886318433809222
 GameObject:
   m_ObjectHideFlags: 0
@@ -684,7 +762,7 @@ GameObject:
   - component: {fileID: 2286238738827108919}
   - component: {fileID: 201198032209831533}
   m_Layer: 5
-  m_Name: White_Potion
+  m_Name: Black_Potion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -758,6 +836,7 @@ GameObject:
   - component: {fileID: 7700647260724803718}
   - component: {fileID: 1847575013043991807}
   - component: {fileID: 7427996780965551579}
+  - component: {fileID: 1470834841253233606}
   m_Layer: 5
   m_Name: Cyan_Potion
   m_TagString: Untagged
@@ -822,6 +901,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1470834841253233606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8724773839660573165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 416a61ca308969043ad2acb9e8e5ad9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8757666442601856513
 GameObject:
   m_ObjectHideFlags: 0
