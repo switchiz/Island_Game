@@ -21,12 +21,12 @@ public class Mob_Base : MonoBehaviour
     /// <summary>
     /// 플레이어 발견 ( true면 발견 , false면 미발견 )
     /// </summary>
-    bool player_checked = true;
+    bool player_checked = false;
 
     /// <summary>
     /// 플레이어를 발견하는 범위 
     /// </summary>
-    public float player_insight;
+    public float player_insight = 3;
 
     /// <summary>
     ///  밟고있던 땅을 기억하기 위한 임시 저장고
@@ -116,6 +116,19 @@ public class Mob_Base : MonoBehaviour
         if (ArrayBlock > 0) // 할당된 요소가 있을 때만 실행
         {
             moveSet(checkMap[moveBlock[Random.Range(0, ArrayBlock)]]);
+
+            // 플레이어가 주변에 있는지 체크함.
+            playerchecked();
+            
+        }
+    }
+
+    private void playerchecked() // 기본 찾기 , 몹에 따라 바뀔 수 있음.
+    {
+        if (Mathf.Abs(player.playerX - Mob_x) < player_insight && Mathf.Abs(player.playerZ - Mob_z) < player_insight)
+        {
+            Debug.Log("플레이어 발견");
+            player_checked = true;
         }
     }
 
@@ -139,6 +152,7 @@ public class Mob_Base : MonoBehaviour
             if (checkMap[i].x == path[0].gridX && checkMap[i].z == path[0].gridZ) // i 번째 MapObject의 좌표가 같고 이동가능이라면,
             {
                 moveSet(checkMap[i]);
+
             }
         }
 

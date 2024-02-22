@@ -23,7 +23,6 @@ public class GameManager : Singleton<GameManager>
         {
 
             if (potion == null)
-                Debug.Log("ok");
                 potion = FindAnyObjectByType<Potion_System>();
             return potion;
         }
@@ -52,8 +51,12 @@ public class GameManager : Singleton<GameManager>
         get 
         {
             if (grid == null)
+            {
                 grid = FindAnyObjectByType<Grid_System>();
-            Debug.Log("Grid ok");
+                Debug.Log("Grid ok");
+            }    
+                
+            
             return grid; 
         }
     }
