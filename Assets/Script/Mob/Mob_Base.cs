@@ -103,7 +103,7 @@ public class Mob_Base : MonoBehaviour
 
                 for (int i = 0; i < checkMap.Length; i++) //  모든 MapObject 확인
                 {
-                    if (checkMap[i].x == x && checkMap[i].z == z && checkMap[i].Available_move == true) // i 번째 MapObject의 좌표가 같고 이동가능이라면,
+                    if (checkMap[i].x == x && checkMap[i].z == z && checkMap[i].Available_move ) // i 번째 MapObject의 좌표가 같고 이동가능이라면,
                     {
                         moveBlock[ArrayBlock] = i; // i 번째 블럭을 기록
                         ArrayBlock++;
@@ -171,7 +171,6 @@ public class Mob_Base : MonoBehaviour
         }
         else
         {
-            
             Vector3 objDir = obj.transform.position;
             Vector3 selfDir = transform.position;
             selfDir.y = 0;

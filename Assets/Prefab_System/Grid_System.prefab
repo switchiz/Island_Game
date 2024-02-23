@@ -55,3 +55,4 @@ MonoBehaviour:
   waterPrefab: {fileID: 9017685638422816556, guid: 1f5ccf76678a0544d88418517f674a4d, type: 3}
   wallPrefab: {fileID: 389422324050062235, guid: 3c612f91e586bca4a80fc5fcb445b37a, type: 3}
   treePrefab: {fileID: 2303790651989673195, guid: a4b87fa62bd0ac84eaac2b718a7eaaa5, type: 3}
+  nonfloorPrefab: {fileID: 2303790651989673195, guid: 431972ad96793f947830a32d42eab1d1, type: 3}

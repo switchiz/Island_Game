@@ -53,7 +53,6 @@ public class GameManager : Singleton<GameManager>
             if (grid == null)
             {
                 grid = FindAnyObjectByType<Grid_System>();
-                Debug.Log("Grid ok");
             }    
                 
             

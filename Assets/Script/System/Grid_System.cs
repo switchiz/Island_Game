@@ -21,6 +21,9 @@ public class Grid_System : MonoBehaviour
     public GameObject wallPrefab;  // 8
     public GameObject treePrefab; // 9
 
+    public GameObject nonfloorPrefab; // X
+
+
 
     public Node[,] grid; // 맵오브젝트(셀) 노드를 저장할 2D 배열
 
@@ -86,6 +89,9 @@ public class Grid_System : MonoBehaviour
                         break;
                     case '9':
                         prefabToInstantiate = treePrefab; // 나무
+                        break;
+                    case 'X':
+                        prefabToInstantiate = nonfloorPrefab; // 이동불가 맵
                         break;
 
 

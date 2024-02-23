@@ -26,6 +26,11 @@ public class MapObject : MonoBehaviour
     public bool available_move;
 
     /// <summary>
+    /// true면 Item이 있음. false면 없음
+    /// </summary>
+    public bool available_item = false;
+
+    /// <summary>
     /// 프로퍼티
     /// </summary>
     public bool Available_move
@@ -37,6 +42,7 @@ public class MapObject : MonoBehaviour
             {
                 available_move = value;
                 SetNode();
+                Debug.Log("노드값 변경");
             }
         }
     }
@@ -59,6 +65,7 @@ public class MapObject : MonoBehaviour
     {
         Node node = grid.GetNode(x, z);
         node.SetMoveNode(available_move);
+
     }
 }
 

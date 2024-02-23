@@ -81,7 +81,7 @@ public class Player : MonoBehaviour
 
         switch(player_Action)
         {
-            case 0: // 이동 명령
+            case 0: // 이동 명령 , 아이템이 있다면 획득함.
                 movePlayer(mouseRay); 
                 break;
 
@@ -97,14 +97,25 @@ public class Player : MonoBehaviour
             GameObject selectObj = hitInfo.collider.gameObject;
             MapObject objectkey = selectObj.gameObject.GetComponent<MapObject>();
 
-            // 이동가능하며 & 플레이어 자신의 위치는 불가능 & 주위 8칸만 지정가능
-            if (objectkey.Available_move && !(playerX == objectkey.x && playerZ == objectkey.z) && (MathF.Abs(objectkey.x - playerX) <= 1) && (MathF.Abs(objectkey.z - playerZ) <= 1))
+            if (!(playerX == objectkey.x && playerZ == objectkey.z) && (MathF.Abs(objectkey.x - playerX) <= 1) && (MathF.Abs(objectkey.z - playerZ) <= 1)) // 주위 8칸 선택가능
             {
-                moveSet(objectkey.x, objectkey.height, objectkey.z); // 이동함
-                playerX = objectkey.x;
-                playerZ = objectkey.z;
-                Turn_Action?.Invoke(); // 1턴 진행
+                if (objectkey.Available_move) // 이동가능 하다면 
+                {
+                    moveSet(objectkey.x, objectkey.height, objectkey.z); // 이동함
+                    playerX = objectkey.x;
+                    playerZ = objectkey.z;
+                    Turn_Action?.Invoke(); // 1턴 진행
+                }
+                else if (!objectkey.Available_move && objectkey.available_item) // 이동 불가능하지만, 아이템이 있다면
+                {
+                    moveSet(objectkey.x, objectkey.height, objectkey.z); // 이동함
+                    playerX = objectkey.x;
+                    playerZ = objectkey.z;
+                    Turn_Action?.Invoke(); // 1턴 진행
+                }
+
             }
+
         }
     }
 
