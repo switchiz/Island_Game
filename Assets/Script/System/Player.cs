@@ -10,7 +10,7 @@ using Color = UnityEngine.Color;
 public class Player : MonoBehaviour
 {
     PlayerInput playerinput;
-
+    Potion_System potion_System;
 
     /// <summary>
     /// 플레이어의 좌표 ( x,z )
@@ -35,11 +35,14 @@ public class Player : MonoBehaviour
     /// <summary>
     /// 플레이어가 할 행동 ( 0 = 이동 // 1~3 = R G B // 4~6 C P Y // 7~9 B , W , Rainbow )
     /// </summary>
-    int player_Action = 0;
+    public int player_Action = 0;
 
     private void Awake()
     {
+        potion_System = GameManager.Instance.Potion;
+
         playerinput = new();
+
         blockMask = 1 << LayerMask.NameToLayer("MapObj");
         
     }
@@ -79,15 +82,17 @@ public class Player : MonoBehaviour
     {
         Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition); // 마우스 포인터 위치
 
-        switch(player_Action)
+        if (player_Action == 0)
         {
-            case 0: // 이동 명령 , 아이템이 있다면 획득함.
-                movePlayer(mouseRay); 
-                break;
-
-
+            movePlayer(mouseRay);
         }
+        else
+        {
+            castPotion(mouseRay);
+        }
+
     }
+
 
 
     private void movePlayer(Ray ray) 
@@ -113,10 +118,26 @@ public class Player : MonoBehaviour
                     playerZ = objectkey.z;
                     Turn_Action?.Invoke(); // 1턴 진행
                 }
-
             }
 
         }
+    }
+
+    private void castPotion(Ray mouseRay)
+    {
+        if (Physics.Raycast(mouseRay, out RaycastHit hitInfo, 10.0f, blockMask)) // 선택한게 블럭일때만
+        {
+            GameObject selectObj = hitInfo.collider.gameObject;
+            MapObject objectkey = selectObj.gameObject.GetComponent<MapObject>();
+            if (!(playerX == objectkey.x && playerZ == objectkey.z) && (MathF.Abs(objectkey.x - playerX) <= 4) && (MathF.Abs(objectkey.z - playerZ) <= 4)) // 주위 4칸 선택가능
+            {
+                potion_System.potion_number[player_Action - 1].Potion_number -= 1;
+                player_Action = 0;
+                potion_System.potion_Reset();
+            }
+            
+        }
+
     }
 
     void moveSet(float x, float y, float z)

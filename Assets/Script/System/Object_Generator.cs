@@ -33,7 +33,7 @@ public class Object_Generator : MonoBehaviour
     {
         Turn_Count++;
 
-        if ( Turn_Count%3 == 0) // 10턴 주기로 박스 생성 10% 확률로 레어 보물상자
+        if ( Turn_Count%10 == 0) // 10턴 주기로 박스 생성 10% 확률로 레어 보물상자
         {
             int i = Random.Range(1, 11); // 0~10
 
@@ -41,7 +41,7 @@ public class Object_Generator : MonoBehaviour
             else CreateObject(treasure);              // 3~10 
         }
 
-        if ( Turn_Count%15 == 0)
+        if ( Turn_Count%15 == 0) // 15턴 주기로 xx
         {
             Turn_Count = 0;
         }
@@ -68,13 +68,13 @@ public class Object_Generator : MonoBehaviour
         }
        
         createMap = checkMap[moveBlock[Random.Range(0, temp)]];     // 생성할 블럭을 할당
-        Debug.Log($"할당된 블럭{createMap.x},{createMap.z}");
-
         GameObject CreateObj = Instantiate(obj); // 해당되는 인스턴스 생성
 
 
         // 해당되는 인스턴스에서 컴포넌트 불러오기 ( 아이템이라면 )
-        Item_Base item = CreateObj.GetComponent<Item_Base>(); 
+        Item_Base item = CreateObj.GetComponent<Item_Base>();
+        // 해당되는 인스턴스에서 컴포넌트 불러오기 ( 몬스터라면 )
+
         if ( item != null) // 없으면 안함
         {
             item.ItemSet(createMap);   // 코드에서, 위치지정 메서드 실행

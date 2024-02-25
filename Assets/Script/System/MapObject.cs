@@ -42,7 +42,6 @@ public class MapObject : MonoBehaviour
             {
                 available_move = value;
                 SetNode();
-                Debug.Log("노드값 변경");
             }
         }
     }
