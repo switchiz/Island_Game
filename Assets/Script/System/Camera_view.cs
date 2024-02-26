@@ -27,11 +27,14 @@ public class Camera_view : MonoBehaviour
         camerainputs.Camera.Enable();
         camerainputs.Camera.PlayerView.performed += view_Player;
         camerainputs.Camera.TopView.performed += view_Top;
+        camerainputs.Camera.TopView_2.performed += view_Top_2;
     }
+
+
 
     private void OnDisable()
     {
-
+        camerainputs.Camera.TopView_2.performed -= view_Top_2;
         camerainputs.Camera.PlayerView.performed -= view_Player;
         camerainputs.Camera.TopView.performed -= view_Top;
         camerainputs.Camera.Disable();
@@ -41,11 +44,19 @@ public class Camera_view : MonoBehaviour
     {
         vcams[0].Priority = 5;
         vcams[1].Priority = 10;
+        vcams[2].Priority = 5;
     }
 
     private void view_Player(InputAction.CallbackContext context)
     {
         vcams[0].Priority = 10;
         vcams[1].Priority = 5;
+        vcams[2].Priority = 5;
+    }
+    private void view_Top_2(InputAction.CallbackContext context)
+    {
+        vcams[0].Priority = 5;
+        vcams[1].Priority = 5;
+        vcams[2].Priority = 10;
     }
 }

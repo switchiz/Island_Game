@@ -16,7 +16,7 @@ public class Potion_Base : MonoBehaviour, IPointerClickHandler
     /// <summary>
     /// 현재 이 포션의 갯수
     /// </summary>
-    public int potion_number = 3;
+    public int potion_number = 0;
 
 
     /// <summary>
@@ -30,6 +30,7 @@ public class Potion_Base : MonoBehaviour, IPointerClickHandler
             if (potion_number != value)
             {
                 potion_number = value;
+                Debug.Log("포션값 변경");
                 textMeshProUGUI.text = $"{potion_number}";
             }
         }
@@ -44,6 +45,7 @@ public class Potion_Base : MonoBehaviour, IPointerClickHandler
     {
         system = GameManager.Instance.Potion;
         textMeshProUGUI = GetComponentInChildren<TextMeshProUGUI>();
+        textMeshProUGUI.text = $"{potion_number}";
     }
 
     public void OnPointerClick(PointerEventData eventData)

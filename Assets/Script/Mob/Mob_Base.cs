@@ -1,17 +1,38 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEditor;
+using UnityEditor.PackageManager;
 using UnityEngine;
+using UnityEngine.InputSystem.Processors;
 using static UnityEditor.Experimental.GraphView.GraphView;
 using Random = UnityEngine.Random;
 
 public class Mob_Base : MonoBehaviour
 {
-    int Mob_MaxHp = 1;
+    public int Mob_MaxHp;
 
     int Mob_hp;
+
+    int Mob_Hp
+    {
+        get { return Mob_hp; }
+        set
+        {
+            if (Mob_hp != value)
+            {
+                Mob_hp = value;
+                if (Mob_hp <= 0)
+                {
+                    Dead();
+                }
+            }
+        }
+    }
+
+
 
     /// <summary>
     /// // 몬스터의 현재 위치를 기록하기 위한 변수
@@ -22,6 +43,11 @@ public class Mob_Base : MonoBehaviour
     /// 플레이어 발견 ( true면 발견 , false면 미발견 )
     /// </summary>
     bool player_checked = false;
+
+    /// <summary>
+    /// 빙결 시간
+    /// </summary>
+    int Freeze_Duration;
 
     /// <summary>
     /// 플레이어를 발견하는 범위 
@@ -46,44 +72,33 @@ public class Mob_Base : MonoBehaviour
     {
         Mob_hp = Mob_MaxHp;
         grid_sys = GameManager.Instance.Grid;
-        // grid_sys = FindAnyObjectByType<Grid_System>();
-
-    }
-    private void Start()
-    {
-        transform.position = new Vector3(Mob_x * 0.4f, 0.4f, Mob_z * 0.4f);
-
-
-        Ray ray = new Ray(transform.position, Vector3.down); // 시작했을때 null을 피하기위해 시작 땅을 기록함
-        if (Physics.Raycast(ray, out RaycastHit hitInfo, 1.0f))
-        {
-            GameObject selectObj = hitInfo.collider.gameObject;
-            tempCell = selectObj.gameObject.GetComponent<MapObject>();
-            tempCell.Available_move = false;
-
-            Mob_x = tempCell.x;
-            Mob_z = tempCell.z;
-        }
-
         checkMap = GameManager.Instance.MapObject;
         player = GameManager.Instance.Player;
         player.Turn_Action += Mob_Action;
+        // grid_sys = FindAnyObjectByType<Grid_System>();
     }
+
 
     /// <summary>
     /// 플레이어가 행동할때마다 ( 매 턴마다 ) 행동할 행동
     /// </summary>
     private void Mob_Action()
     {
-        if ( !player_checked ) // 플레이어를 발견하지 못했을때 행동
+        if ( Freeze_Duration > 0 )
         {
-            randomBlockSelect();
+            Freeze_Duration--;
         }
-        else // 플레이어 발견시 행동
+        else
         {
-            MoveTo(new Vector2Int(Mob_x, Mob_z), new Vector2Int(player.playerX, player.playerZ));
+            if (!player_checked) // 플레이어를 발견하지 못했을때 행동
+            {
+                randomBlockSelect();
+            }
+            else // 플레이어 발견시 행동
+            {
+                MoveTo(new Vector2Int(Mob_x, Mob_z), new Vector2Int(player.playerX, player.playerZ));
+            }
         }
-
     }
 
     /// <summary>
@@ -198,5 +213,38 @@ public class Mob_Base : MonoBehaviour
     protected virtual void Attack()
     {
         Debug.Log("플레이어를 공격하였다.");
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Potion_Effect"))
+        {
+            Potion_Effect_Base potion_Effect;
+            potion_Effect = other.GetComponent<Potion_Effect_Base>();
+
+            Mob_Hp -= potion_Effect.Damage;
+            Debug.Log($"{potion_Effect.Damage} 피해받음");
+            Freeze_Duration += potion_Effect.Freeze;
+
+            
+        }
+    }
+
+    public void StartSet(MapObject obj)
+    {
+        // 위치 조정
+        transform.position = new Vector3(obj.x * 0.4f, obj.height, obj.z * 0.4f);
+
+        tempCell = obj.gameObject.GetComponent<MapObject>();
+        tempCell.Available_move = false;
+        Mob_x = tempCell.x;
+        Mob_z = tempCell.z;
+    }
+
+    private void Dead()
+    {
+        tempCell.Available_move = tempCell.available; // 지금 밟은 땅 초기화
+        player.Turn_Action -= Mob_Action; // 델리게이트 제거
+        Destroy(this.gameObject);
     }
 }

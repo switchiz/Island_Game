@@ -7,6 +7,13 @@ using UnityEngine;
 public class Item_Base : MonoBehaviour
 {
     MapObject tempObj;
+    protected Potion_System potion_System;
+
+    private void Awake()
+    {
+        potion_System = GameManager.Instance.Potion;
+    }
+
     /// <summary>
     /// 플레이어와 부딪혔는지 체크
     /// </summary>

@@ -24,6 +24,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "TopView_2",
+                    "type": "Button",
+                    "id": "c285eeb0-46da-4706-98d2-e188aefa63ce",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Test1",
                     "type": "Button",
                     "id": "121a7436-de5f-4c91-a892-9475cdddbc84",
@@ -59,11 +68,22 @@
                 {
                     "name": "",
                     "id": "1a268b3b-502c-4172-9b62-3f51e5b226ba",
-                    "path": "<Keyboard>/3",
+                    "path": "<Keyboard>/4",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Test1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a6f447f0-dfe6-449d-9da2-5794899ed7a7",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TopView_2",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

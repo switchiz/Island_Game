@@ -9,6 +9,9 @@ using Color = UnityEngine.Color;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject[] potion_Effect;
+
     PlayerInput playerinput;
     Potion_System potion_System;
 
@@ -32,8 +35,10 @@ public class Player : MonoBehaviour
     /// </summary>
     public Action Turn_Action;
 
+   
+
     /// <summary>
-    /// 플레이어가 할 행동 ( 0 = 이동 // 1~3 = R G B // 4~6 C P Y // 7~9 B , W , Rainbow )
+    /// 플레이어가 할 행동 ( 0 = 이동 // 1~3 = R G B // 4~6 C P Y // 7~9 B , W , Rainbow , 10 = 행동 정지)
     /// </summary>
     public int player_Action = 0;
 
@@ -82,14 +87,18 @@ public class Player : MonoBehaviour
     {
         Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition); // 마우스 포인터 위치
 
-        if (player_Action == 0)
+        if (player_Action != 10)
         {
-            movePlayer(mouseRay);
+            if (player_Action == 0)
+            {
+                movePlayer(mouseRay);
+            }
+            else
+            {
+                castPotion(mouseRay);
+            }
         }
-        else
-        {
-            castPotion(mouseRay);
-        }
+
 
     }
 
@@ -131,13 +140,43 @@ public class Player : MonoBehaviour
             MapObject objectkey = selectObj.gameObject.GetComponent<MapObject>();
             if (!(playerX == objectkey.x && playerZ == objectkey.z) && (MathF.Abs(objectkey.x - playerX) <= 4) && (MathF.Abs(objectkey.z - playerZ) <= 4)) // 주위 4칸 선택가능
             {
-                potion_System.potion_number[player_Action - 1].Potion_number -= 1;
-                player_Action = 0;
+                Vector3 dir = new Vector3(objectkey.x*0.4f, objectkey.height, objectkey.z*0.4f);
+                GameObject potion = Instantiate(potion_Effect[player_Action - 1]);
+                potion.transform.position = dir;
+
+                potion_System.potion_EA[player_Action - 1].Potion_number -= 1;
                 potion_System.potion_Reset();
+
+                if ( player_Action == 8 )
+                {
+                    if (objectkey.Available_move) // 이동가능 하다면 
+                    {
+                        moveSet(objectkey.x, objectkey.height, objectkey.z); // 이동함
+                        playerX = objectkey.x;
+                        playerZ = objectkey.z;
+                    }
+                    else if (!objectkey.Available_move && objectkey.available_item) // 이동 불가능하지만, 아이템이 있다면
+                    {
+                        moveSet(objectkey.x, objectkey.height, objectkey.z); // 이동함
+                        playerX = objectkey.x;
+                        playerZ = objectkey.z;
+                    }
+                }
+
+                StartCoroutine(Action_Cooltime());
+                
             }
             
         }
 
+    }
+
+    IEnumerator Action_Cooltime()
+    {
+        player_Action = 10;
+        yield return new WaitForSeconds(0.5f);
+        player_Action = 0;
+        Turn_Action?.Invoke(); // 1턴 진행
     }
 
     void moveSet(float x, float y, float z)

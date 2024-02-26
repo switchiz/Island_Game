@@ -8,6 +8,8 @@ TagManager:
   - Floor_2
   - Floor_Wall
   - Monster
+  - FxTemporaire
+  - Potion_Effect
   layers:
   - Default
   - TransparentFX

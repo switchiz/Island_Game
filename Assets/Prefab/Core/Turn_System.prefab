@@ -46,7 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   treasure: {fileID: 735312312059532066, guid: f8208361fc863b546a509cfc71447d71, type: 3}
   rare_treasure: {fileID: 735312312059532066, guid: efca5621077eada47842cffc68b2f38c, type: 3}
-  Lion: {fileID: 0}
+  Lion: {fileID: 1553991042791506, guid: d2edcf95960b81249bf3f4a30ad1a908, type: 3}
+  chick: {fileID: 1969419073538870, guid: aa3784adb6428184e991be2d60ee0cb2, type: 3}
 --- !u!1 &6706560376712185642
 GameObject:
   m_ObjectHideFlags: 0

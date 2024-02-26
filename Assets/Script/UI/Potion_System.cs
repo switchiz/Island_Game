@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 [Flags] // 이 enum은 bit flag로 사용한다고 표시하는 어트리뷰트
 public enum PotionType : byte
@@ -28,7 +29,7 @@ public class Potion_System : MonoBehaviour
 
     public Transform select;
     Transform[] potions;
-    public Potion_Base[] potion_number;
+    public Potion_Base[] potion_EA;
 
     /// <summary>
     /// 첫번째 선택을 저장하는 변수
@@ -46,7 +47,7 @@ public class Potion_System : MonoBehaviour
         player = GameManager.Instance.Player;
         select.transform.position = new Vector3(2000,2000,0);
         potions = GetComponentsInChildren<Transform>();
-        potion_number = GetComponentsInChildren<Potion_Base>();
+        potion_EA = GetComponentsInChildren<Potion_Base>();
         // 켜기 |= 끄기 &=
     }
 
@@ -79,30 +80,33 @@ public class Potion_System : MonoBehaviour
             {
                 if (temp_potion == PotionType.Red || temp_potion == PotionType.Green || temp_potion == PotionType.Blue ) // temp가 하급이라면
                 {
-                    if (potion == PotionType.Red || potion == PotionType.Green || potion == PotionType.Blue)
+                    if (potion == PotionType.Red || potion == PotionType.Green || potion == PotionType.Blue) // 하급 + 하급
                     {
-                        Debug.Log("하급 + 하급 조합");
                         temp_potion |= potion; // 포션을 합친다.
                         GivePotion(temp_potion);
+                        
                         temp_potion = 0;
                     }    
-                    else
+                    else // 하급 + 중급
                     {
-                        Debug.Log("하급 + 중급 : 제조 X");
                         temp_potion = 0;
                     }
 
                 }
-                else                                                                                                     // temp가 중급             
+                else         
                 {
-                    if (potion == PotionType.Red || potion == PotionType.Green || potion == PotionType.Blue)
+                    if (potion == PotionType.Red || potion == PotionType.Green || potion == PotionType.Blue) // 중급 + 하급
                     {
-                        Debug.Log("중급 + 하급 : 제조 X");
                         temp_potion = 0;
                     }
-                    else
+                    else // 중급 + 중급
                     {
-                        Debug.Log("중급 + 중급 조합");
+                        if (potion == PotionType.Cyan) potion_EA[3].Potion_number -= 1;
+                        if (potion == PotionType.Purple) potion_EA[4].Potion_number -= 1;
+                        if (potion == PotionType.Yellow) potion_EA[5].Potion_number -= 1;
+                        if (temp_potion == PotionType.Cyan) potion_EA[3].Potion_number -= 1;
+                        if (temp_potion == PotionType.Purple) potion_EA[4].Potion_number -= 1;
+                        if (temp_potion == PotionType.Yellow) potion_EA[5].Potion_number -= 1;
                         GivePotion(PotionType.Check);
                         temp_potion = 0;
                         
@@ -145,13 +149,22 @@ public class Potion_System : MonoBehaviour
 
     void GivePotion(PotionType type)
     {
+        Debug.Log(type);
         switch(type)
         {
-            case PotionType.Cyan: break;
-            case PotionType.Purple: break;
-            case PotionType.Yellow: break;
+            case PotionType.Cyan: potion_EA[3].Potion_number += 1; potion_EA[1].Potion_number -= 1; potion_EA[2].Potion_number -= 1; break;
+            case PotionType.Purple: potion_EA[4].Potion_number += 1; potion_EA[0].Potion_number -= 1; potion_EA[2].Potion_number -= 1; break;
+            case PotionType.Yellow: potion_EA[5].Potion_number += 1; potion_EA[0].Potion_number -= 1; potion_EA[1].Potion_number -= 1; break;
             default: // 중급 = 중급이라면 상급 포션 제작
                 {
+                    int a = Random.Range(0, 3);
+
+                    switch(a)
+                    {
+                        case 0: potion_EA[6].Potion_number += 1; break;
+                        case 1: potion_EA[7].Potion_number += 1; break;
+                        case 2: potion_EA[8].Potion_number += 1; break;
+                    }
                     
                     break;
                 }

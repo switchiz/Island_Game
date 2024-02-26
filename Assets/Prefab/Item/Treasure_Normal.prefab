@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 735312312062463778}
   - component: {fileID: 735312312061464034}
   - component: {fileID: 1600074336041563024}
-  - component: {fileID: 5169112347348817358}
+  - component: {fileID: -288429752677065969}
   m_Layer: 0
   m_Name: Treasure_Normal
   m_TagString: Untagged
@@ -107,7 +107,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.28, y: 0.32, z: 0.39999998}
   m_Center: {x: 0, y: 0.16, z: 0}
---- !u!114 &5169112347348817358
+--- !u!114 &-288429752677065969
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -116,7 +116,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 735312312059532066}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3239b1e0de066d419598376ce199fe4, type: 3}
+  m_Script: {fileID: 11500000, guid: a04e86a879e34674fbb4974967f83117, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &3406476641447937483

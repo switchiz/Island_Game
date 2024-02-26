@@ -241,6 +241,7 @@ GameObject:
   - component: {fileID: 1625866341026025546}
   - component: {fileID: 2291942322829125473}
   - component: {fileID: 5397744087850407019}
+  - component: {fileID: 7740327388811870657}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -298,8 +299,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fee679effa96124f8b040842253b1a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerX: 5
-  playerZ: 8
+  potion_Effect:
+  - {fileID: 5006746200787487390, guid: b5227310a72cf1648b41d2182e59b562, type: 3}
+  - {fileID: 4462570383031618421, guid: f20b30379dc5bdf40a4848e37b703433, type: 3}
+  - {fileID: 4944903039185658112, guid: f3bd1c51238acde419d04e00d5cffd84, type: 3}
+  - {fileID: 4944903039185658112, guid: 099826ea5645a52489190658925fb2b7, type: 3}
+  - {fileID: 1726150361289383434, guid: c38a0b8e7d9f3eb4bbab8e5aca25aefb, type: 3}
+  - {fileID: 995445242021855836, guid: c61b189b4191aa0448b28f47dd16314b, type: 3}
+  - {fileID: 764478953624962063, guid: 3cf3fdfbaf0e9d448b255d1c0e5f0a66, type: 3}
+  - {fileID: 4527991019458814361, guid: 9983907ea062e8e41a3fbd877284499c, type: 3}
+  - {fileID: 3499498106187735966, guid: 796b496dd136de34498030a089cca425, type: 3}
+  playerX: 11
+  playerZ: 13
+  player_Action: 0
 --- !u!65 &5397744087850407019
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -321,6 +333,33 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.5, y: 0.5, z: 0.5}
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!54 &7740327388811870657
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1006303789170906001}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 90
+  m_CollisionDetection: 0
 --- !u!1 &1623180595617741251
 GameObject:
   m_ObjectHideFlags: 0

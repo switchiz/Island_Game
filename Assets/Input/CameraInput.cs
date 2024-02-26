@@ -46,6 +46,15 @@ public partial class @CameraInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""TopView_2"",
+                    ""type"": ""Button"",
+                    ""id"": ""c285eeb0-46da-4706-98d2-e188aefa63ce"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Test1"",
                     ""type"": ""Button"",
                     ""id"": ""121a7436-de5f-4c91-a892-9475cdddbc84"",
@@ -81,11 +90,22 @@ public partial class @CameraInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""1a268b3b-502c-4172-9b62-3f51e5b226ba"",
-                    ""path"": ""<Keyboard>/3"",
+                    ""path"": ""<Keyboard>/4"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Test1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a6f447f0-dfe6-449d-9da2-5794899ed7a7"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TopView_2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -98,6 +118,7 @@ public partial class @CameraInput: IInputActionCollection2, IDisposable
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_PlayerView = m_Camera.FindAction("PlayerView", throwIfNotFound: true);
         m_Camera_TopView = m_Camera.FindAction("TopView", throwIfNotFound: true);
+        m_Camera_TopView_2 = m_Camera.FindAction("TopView_2", throwIfNotFound: true);
         m_Camera_Test1 = m_Camera.FindAction("Test1", throwIfNotFound: true);
     }
 
@@ -162,6 +183,7 @@ public partial class @CameraInput: IInputActionCollection2, IDisposable
     private List<ICameraActions> m_CameraActionsCallbackInterfaces = new List<ICameraActions>();
     private readonly InputAction m_Camera_PlayerView;
     private readonly InputAction m_Camera_TopView;
+    private readonly InputAction m_Camera_TopView_2;
     private readonly InputAction m_Camera_Test1;
     public struct CameraActions
     {
@@ -169,6 +191,7 @@ public partial class @CameraInput: IInputActionCollection2, IDisposable
         public CameraActions(@CameraInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @PlayerView => m_Wrapper.m_Camera_PlayerView;
         public InputAction @TopView => m_Wrapper.m_Camera_TopView;
+        public InputAction @TopView_2 => m_Wrapper.m_Camera_TopView_2;
         public InputAction @Test1 => m_Wrapper.m_Camera_Test1;
         public InputActionMap Get() { return m_Wrapper.m_Camera; }
         public void Enable() { Get().Enable(); }
@@ -185,6 +208,9 @@ public partial class @CameraInput: IInputActionCollection2, IDisposable
             @TopView.started += instance.OnTopView;
             @TopView.performed += instance.OnTopView;
             @TopView.canceled += instance.OnTopView;
+            @TopView_2.started += instance.OnTopView_2;
+            @TopView_2.performed += instance.OnTopView_2;
+            @TopView_2.canceled += instance.OnTopView_2;
             @Test1.started += instance.OnTest1;
             @Test1.performed += instance.OnTest1;
             @Test1.canceled += instance.OnTest1;
@@ -198,6 +224,9 @@ public partial class @CameraInput: IInputActionCollection2, IDisposable
             @TopView.started -= instance.OnTopView;
             @TopView.performed -= instance.OnTopView;
             @TopView.canceled -= instance.OnTopView;
+            @TopView_2.started -= instance.OnTopView_2;
+            @TopView_2.performed -= instance.OnTopView_2;
+            @TopView_2.canceled -= instance.OnTopView_2;
             @Test1.started -= instance.OnTest1;
             @Test1.performed -= instance.OnTest1;
             @Test1.canceled -= instance.OnTest1;
@@ -222,6 +251,7 @@ public partial class @CameraInput: IInputActionCollection2, IDisposable
     {
         void OnPlayerView(InputAction.CallbackContext context);
         void OnTopView(InputAction.CallbackContext context);
+        void OnTopView_2(InputAction.CallbackContext context);
         void OnTest1(InputAction.CallbackContext context);
     }
 }
