@@ -30,7 +30,6 @@ public class Potion_Base : MonoBehaviour, IPointerClickHandler
             if (potion_number != value)
             {
                 potion_number = value;
-                Debug.Log("포션값 변경");
                 textMeshProUGUI.text = $"{potion_number}";
             }
         }

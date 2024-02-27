@@ -38,7 +38,6 @@ public class GameManager : Singleton<GameManager>
         {
             if (mapObject == null)
             mapObject = FindObjectsOfType<MapObject>();
-            
             return mapObject;
 
         }
