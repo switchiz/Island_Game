@@ -59,6 +59,21 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    Turn_System turn;
+
+    public Turn_System Turn
+    {
+        get
+        {
+            if (turn == null)
+            {
+                turn = FindAnyObjectByType<Turn_System>();
+            }
+
+            return turn;
+        }
+    }
+
 
     protected override void OnInitialize()
     {
@@ -66,6 +81,7 @@ public class GameManager : Singleton<GameManager>
         potion = FindAnyObjectByType<Potion_System>();
         mapObject = FindObjectsOfType<MapObject>();
         grid = FindAnyObjectByType<Grid_System>();
+        turn = FindAnyObjectByType<Turn_System>();
 
     }
 

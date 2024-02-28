@@ -4,35 +4,43 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
 
-public class Object_Generator : MonoBehaviour
+public class Turn_System : MonoBehaviour
 {
     Player player;
     Grid_System grid_System;
     MapObject[] checkMap;
     MapObject createMap;
     TextMeshProUGUI textMeshProUGUI;
+    
+
+    [SerializeField]
+    private GameObject[] card;
 
     public GameObject treasure; // 보물상자
     public GameObject rare_treasure; // 상급_보물상자
     public GameObject Lion;     // 사자 ( 몬스터 )
     public GameObject chick;     // 사자 ( 몬스터 )
+    public GameObject blur; // 화면가리개
 
     /// <summary>
     /// 하루 길이 ( 턴 )
     /// </summary>
-    int max_turn = 180;
+    int max_turn = 5;
+
+    public int temp_max_turn = 0;
 
     /// <summary>
     /// 난이도 ( 몹 생성 주기 )
     /// </summary>
-    int diffcult_gen;
+    int difficult_gen;
 
     /// <summary>
     /// 난이도 ( 기타 등등 )
     /// </summary>
-    int diffcult;
+    int difficult;
 
     int turn_Count = 0;
 
@@ -44,7 +52,7 @@ public class Object_Generator : MonoBehaviour
             if (turn_Count != value)
             {
                 turn_Count = value;
-                textMeshProUGUI.text = $"Turn : {max_turn - turn_Count}";
+                textMeshProUGUI.text = $"Turn : {max_turn + temp_max_turn - turn_Count}";
             }
 
         }
@@ -55,13 +63,14 @@ public class Object_Generator : MonoBehaviour
         player = GameManager.Instance.Player;
         grid_System = GameManager.Instance.Grid;
         checkMap = GameManager.Instance.MapObject;
+        
 
         Debug.Log(checkMap.Length);
 
         player.Turn_Action += Object_Count;
 
         textMeshProUGUI = GetComponentInChildren<TextMeshProUGUI>();
-        textMeshProUGUI.text = $"Turn :  {max_turn - turn_Count}";
+        textMeshProUGUI.text = $"Turn :  {max_turn + temp_max_turn - turn_Count}";
     }
 
     void Object_Count()
@@ -85,12 +94,12 @@ public class Object_Generator : MonoBehaviour
             else CreateObject(treasure);              // 3~10 
         }
 
-        if (Turn_Count % (50 - diffcult_gen) == 0) // 50턴 주기로 사자
+        if (Turn_Count % (50 - difficult_gen) == 0) // 50턴 주기로 사자
         {
             CreateObject(Lion);
         }
 
-        if ( Turn_Count % ( 36 - diffcult_gen) == 0) // 32턴 주기로 사자
+        if ( Turn_Count % ( 36 - difficult_gen) == 0) // 32턴 주기로 사자
         {
             CreateObject(Lion);
         }
@@ -100,8 +109,12 @@ public class Object_Generator : MonoBehaviour
             CreateObject(chick);
         }
 
-        if ( Turn_Count == max_turn )
+        if ( Turn_Count == max_turn + temp_max_turn )
         {
+            temp_max_turn = 0;
+
+            blur.SetActive(true);
+
             Turn_Card();
         }
 
@@ -118,21 +131,34 @@ public class Object_Generator : MonoBehaviour
         player.player_Action = 10;
 
         // 무작위 카드 생성 , 카드를 선택하면 Turn_Reset
-
-
+        GameObject tileObj = Instantiate(card[0], this.transform.position, Quaternion.identity, this.transform);
+        
     }
 
 
-    private void Turn_Reset()
+    public void Turn_Reset()
     {
         // 몹 + 상자 초기화
-        GameObject[] gameObjects = GetComponent<GameObject[]>();
+        Mob_Base[] mob_Bases = FindObjectsOfType<Mob_Base>();
+        Item_Base[] items = FindObjectsOfType<Item_Base>();
+
+        foreach ( Item_Base item_ in items )
+        {
+            item_.ItemRemove();
+        }
+
+        foreach ( Mob_Base mob_Base in mob_Bases )
+        {
+            mob_Base.Dead();
+        }
 
         // 턴 초기화
+        blur.SetActive(false);
         Turn_Count = 0;
+        player.player_Action = 0;
 
         // 난이도 상승
-        diffcult_gen++;
+        difficult_gen++;
     }
 
     private void CreateObject(GameObject obj)

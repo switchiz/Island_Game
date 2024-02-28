@@ -632,6 +632,11 @@ MonoBehaviour:
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
+--- !u!1 &1670715511 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8623130160250775006, guid: 7b59a9c0225a57c4e86318a1a42d36ea, type: 3}
+  m_PrefabInstance: {fileID: 2576513647524222637}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1959769316
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -785,9 +790,57 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4144133819072619202, guid: 7b59a9c0225a57c4e86318a1a42d36ea, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4305441023449029176, guid: 7b59a9c0225a57c4e86318a1a42d36ea, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 6312869605368819943, guid: 7b59a9c0225a57c4e86318a1a42d36ea, type: 3}
+      propertyPath: blur
+      value: 
+      objectReference: {fileID: 1670715511}
+    - target: {fileID: 6312869605368819943, guid: 7b59a9c0225a57c4e86318a1a42d36ea, type: 3}
+      propertyPath: card.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6312869605368819943, guid: 7b59a9c0225a57c4e86318a1a42d36ea, type: 3}
+      propertyPath: card.Array.data[0]
+      value: 
+      objectReference: {fileID: 7696242309088974547, guid: b00ad3eeea876ec4baa4225c2bdab7cd, type: 3}
+    - target: {fileID: 6312869605368819943, guid: 7b59a9c0225a57c4e86318a1a42d36ea, type: 3}
+      propertyPath: card.Array.data[1]
+      value: 
+      objectReference: {fileID: 7696242309088974547, guid: 878c52fc94150ea47901b4a3babb6bc9, type: 3}
+    - target: {fileID: 6312869605368819943, guid: 7b59a9c0225a57c4e86318a1a42d36ea, type: 3}
+      propertyPath: card.Array.data[2]
+      value: 
+      objectReference: {fileID: 7696242309088974547, guid: b00ad3eeea876ec4baa4225c2bdab7cd, type: 3}
+    - target: {fileID: 6312869605368819943, guid: 7b59a9c0225a57c4e86318a1a42d36ea, type: 3}
+      propertyPath: card.Array.data[3]
+      value: 
+      objectReference: {fileID: 7696242309088974547, guid: b00ad3eeea876ec4baa4225c2bdab7cd, type: 3}
+    - target: {fileID: 6312869605368819943, guid: 7b59a9c0225a57c4e86318a1a42d36ea, type: 3}
+      propertyPath: card.Array.data[4]
+      value: 
+      objectReference: {fileID: 7696242309088974547, guid: b00ad3eeea876ec4baa4225c2bdab7cd, type: 3}
+    - target: {fileID: 6312869605368819943, guid: 7b59a9c0225a57c4e86318a1a42d36ea, type: 3}
+      propertyPath: card.Array.data[5]
+      value: 
+      objectReference: {fileID: 7696242309088974547, guid: b00ad3eeea876ec4baa4225c2bdab7cd, type: 3}
+    - target: {fileID: 6312869605368819943, guid: 7b59a9c0225a57c4e86318a1a42d36ea, type: 3}
+      propertyPath: card.Array.data[6]
+      value: 
+      objectReference: {fileID: 7696242309088974547, guid: b00ad3eeea876ec4baa4225c2bdab7cd, type: 3}
+    - target: {fileID: 6401348174324635221, guid: 7b59a9c0225a57c4e86318a1a42d36ea, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8623130160250775006, guid: 7b59a9c0225a57c4e86318a1a42d36ea, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -22,12 +22,11 @@ public class Item_Base : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            tempObj.Available_move = true;
-            tempObj.available_item = false;
+
 
             PlayerEffect();
-
-            Destroy(this.gameObject);
+            ItemRemove();
+        
         }
     }
 
@@ -55,7 +54,12 @@ public class Item_Base : MonoBehaviour
         // 해당 지점의 블럭을 Item on 시킴
         obj.available_item = true;
         obj.Available_move = false;
+    }
 
-
+    public void ItemRemove()
+    {
+        tempObj.Available_move = true;
+        tempObj.available_item = false;
+        Destroy(this.gameObject);
     }
 }

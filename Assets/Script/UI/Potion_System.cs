@@ -55,7 +55,6 @@ public class Potion_System : MonoBehaviour
     {
         if (temp_potion == 0) // temp 포션이 비었다면
         {
-            Debug.Log("temp에 저장됨");
             temp_potion = potion; // temp 포션을 저장한다.
             chara_Select(potion); // 플레이어에게 선택한 포션을 보냄.
         }
@@ -68,12 +67,10 @@ public class Potion_System : MonoBehaviour
             {
                 potion = 0;
                 temp_potion = 0; // temp를 비운다.
-                Debug.Log("상급은 조합에 사용 불가능 초기화 실행");
             }
 
             if (potion == temp_potion) // 포션이 같은 종류라면
             {
-                Debug.Log("같은 포션 선택 :초기화");
                 temp_potion = 0;
             }
             else // 같은 종류가 아니라면

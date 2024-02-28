@@ -241,7 +241,7 @@ public class Mob_Base : MonoBehaviour
         Mob_z = tempCell.z;
     }
 
-    private void Dead()
+    public void Dead()
     {
         tempCell.Available_move = tempCell.available; // 지금 밟은 땅 초기화
         player.Turn_Action -= Mob_Action; // 델리게이트 제거

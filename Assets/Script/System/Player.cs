@@ -35,6 +35,8 @@ public class Player : MonoBehaviour
     /// </summary>
     public Action Turn_Action;
 
+    public bool shuffled;
+
    
 
     /// <summary>
@@ -163,6 +165,9 @@ public class Player : MonoBehaviour
                     }
                 }
 
+                if ( shuffled )
+                PotionShake(0,3);// 하급포션 셔플
+
                 StartCoroutine(Action_Cooltime());
                 
             }
@@ -186,6 +191,30 @@ public class Player : MonoBehaviour
         transform.position = new Vector3(x,y,z);
     }
 
+    void PotionShake(int a, int b)
+    {
+        ShufflePart(potion_Effect, a, b); 
+    }
+
+    /// <summary>
+    /// 배열의 특정 부분만 셔플하는 메서드 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="array">선택 배열</param>
+    /// <param name="startIndex">해당부터 </param>
+    /// <param name="length">endIndex + 1</param>
+    public static void ShufflePart<T>(T[] array, int startIndex, int length)
+    {
+        System.Random rng = new System.Random();
+        int endIndex = startIndex + length;
+        for (int i = startIndex; i < endIndex; i++)
+        {
+            int swapIndex = rng.Next(i, endIndex); // i부터 endIndex - 1까지의 랜덤 인덱스
+            T temp = array[i];
+            array[i] = array[swapIndex];
+            array[swapIndex] = temp;
+        }
+    }
 
 
 }
