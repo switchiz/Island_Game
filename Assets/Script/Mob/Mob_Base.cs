@@ -213,6 +213,7 @@ public class Mob_Base : MonoBehaviour
     protected virtual void Attack()
     {
         Debug.Log("플레이어를 공격하였다.");
+        player.Hp--;
     }
 
     private void OnTriggerEnter(Collider other)

@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.UIElements;
+using Image = UnityEngine.UI.Image;
 using Random = UnityEngine.Random;
 
 public class Turn_System : MonoBehaviour
@@ -13,11 +15,12 @@ public class Turn_System : MonoBehaviour
     Grid_System grid_System;
     MapObject[] checkMap;
     MapObject createMap;
-    TextMeshProUGUI textMeshProUGUI;
     
 
     [SerializeField]
     private GameObject[] card;
+
+    public Image image;
 
     public GameObject treasure; // 보물상자
     public GameObject rare_treasure; // 상급_보물상자
@@ -28,9 +31,17 @@ public class Turn_System : MonoBehaviour
     /// <summary>
     /// 하루 길이 ( 턴 )
     /// </summary>
-    int max_turn = 5;
+    int max_turn = 120;
 
+    /// <summary>
+    /// 카드효과로 하루동안 증가하는 턴
+    /// </summary>
     public int temp_max_turn = 0;
+
+    /// <summary>
+    /// 카드효과로 하루동안 포션 셔플 여부
+    /// </summary>
+    public bool shuffle = true;
 
     /// <summary>
     /// 난이도 ( 몹 생성 주기 )
@@ -52,7 +63,6 @@ public class Turn_System : MonoBehaviour
             if (turn_Count != value)
             {
                 turn_Count = value;
-                textMeshProUGUI.text = $"Turn : {max_turn + temp_max_turn - turn_Count}";
             }
 
         }
@@ -69,13 +79,16 @@ public class Turn_System : MonoBehaviour
 
         player.Turn_Action += Object_Count;
 
-        textMeshProUGUI = GetComponentInChildren<TextMeshProUGUI>();
-        textMeshProUGUI.text = $"Turn :  {max_turn + temp_max_turn - turn_Count}";
+        image.fillAmount = 1.0f;
     }
 
     void Object_Count()
     {
+        
         Turn_Count++;
+
+        image.fillAmount = 1 - ( (float)turn_Count / (max_turn + temp_max_turn));
+
         if ( Turn_Count == 1)
         {
             int i = Random.Range(1, 11); // 0~10
@@ -96,7 +109,7 @@ public class Turn_System : MonoBehaviour
 
         if (Turn_Count % (50 - difficult_gen) == 0) // 50턴 주기로 사자
         {
-            CreateObject(Lion);
+            // CreateObject(Lion);
         }
 
         if ( Turn_Count % ( 36 - difficult_gen) == 0) // 32턴 주기로 사자
@@ -130,8 +143,11 @@ public class Turn_System : MonoBehaviour
         // 플레이어 클릭 방지 ( UI만 클릭가능 )
         player.player_Action = 10;
 
+        // 셔플 멈추기
+        player.shuffled = false;
+
         // 무작위 카드 생성 , 카드를 선택하면 Turn_Reset
-        GameObject tileObj = Instantiate(card[0], this.transform.position, Quaternion.identity, this.transform);
+        GameObject tileObj = Instantiate(card[Random.Range(0,card.Length)], this.transform.position, Quaternion.identity, this.transform);
         
     }
 
@@ -153,6 +169,13 @@ public class Turn_System : MonoBehaviour
         }
 
         // 턴 초기화
+        if ( shuffle )
+        {
+            player.PotionShake(0, 3);// 하급포션 셔플
+            player.PotionShake(3, 6);// 중급포션 셔플
+        }
+        shuffle = true;
+
         blur.SetActive(false);
         Turn_Count = 0;
         player.player_Action = 0;

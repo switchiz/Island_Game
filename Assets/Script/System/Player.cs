@@ -35,14 +35,43 @@ public class Player : MonoBehaviour
     /// </summary>
     public Action Turn_Action;
 
+    /// <summary>
+    /// 셔플을 하는지 여부
+    /// </summary>
     public bool shuffled;
-
-   
 
     /// <summary>
     /// 플레이어가 할 행동 ( 0 = 이동 // 1~3 = R G B // 4~6 C P Y // 7~9 B , W , Rainbow , 10 = 행동 정지)
     /// </summary>
     public int player_Action = 0;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public int player_maxhp = 5;
+
+    public int hp;
+
+    public int Hp
+    {
+        get { return hp; }
+        set
+        {
+            if (hp != value)
+            {
+                hp = value;
+                if (hp <= 0)
+                {
+                    Dead();
+                }
+            }
+        }
+    }
+
+    private void Dead()
+    {
+        Debug.Log("죽음 ㅇㅇ");
+    }
 
     private void Awake()
     {
@@ -52,6 +81,7 @@ public class Player : MonoBehaviour
 
         blockMask = 1 << LayerMask.NameToLayer("MapObj");
         
+        Hp = player_maxhp;
     }
 
     private void OnEnable()
@@ -191,7 +221,7 @@ public class Player : MonoBehaviour
         transform.position = new Vector3(x,y,z);
     }
 
-    void PotionShake(int a, int b)
+    public void PotionShake(int a, int b)
     {
         ShufflePart(potion_Effect, a, b); 
     }
@@ -206,7 +236,7 @@ public class Player : MonoBehaviour
     public static void ShufflePart<T>(T[] array, int startIndex, int length)
     {
         System.Random rng = new System.Random();
-        int endIndex = startIndex + length;
+        int endIndex = length;
         for (int i = startIndex; i < endIndex; i++)
         {
             int swapIndex = rng.Next(i, endIndex); // i부터 endIndex - 1까지의 랜덤 인덱스

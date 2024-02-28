@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 5490443432766766673}
   - component: {fileID: 8898192842320545932}
   - component: {fileID: 1606416578456278323}
-  - component: {fileID: -2531997754115941675}
+  - component: {fileID: -5432023634659486929}
   m_Layer: 5
-  m_Name: Card_base
+  m_Name: Card_ 8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5485ab70ad163b9499f2056cc32bbcbe, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e9d6c37b767e0b24db086d86b596eb37, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -76,7 +76,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &-2531997754115941675
+--- !u!114 &-5432023634659486929
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -85,6 +85,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 7696242309088974547}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7410fa583deaf449a3ca481c628fbec, type: 3}
+  m_Script: {fileID: 11500000, guid: 2f08ff2f0e4238040b26e577e4bf608f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

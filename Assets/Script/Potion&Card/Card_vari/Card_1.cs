@@ -8,7 +8,7 @@ public class Card_1 : Card_Base
     protected override void CardEffect()
     {
         base.CardEffect();
-        turn_System.temp_max_turn += 15;
+        turn_System.temp_max_turn = 15;
     }
 
 }
