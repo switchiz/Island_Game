@@ -25,13 +25,15 @@ public class Turn_System : MonoBehaviour
     public GameObject treasure; // 보물상자
     public GameObject rare_treasure; // 상급_보물상자
     public GameObject Lion;     // 사자 ( 몬스터 )
-    public GameObject chick;     // 사자 ( 몬스터 )
+    public GameObject chick;     // 닭 ( 몬스터 )
+    public GameObject dog;     // 개 ( 몬스터 )
+    public GameObject skeleton;     // 스켈레톤 ( 몬스터 )
     public GameObject blur; // 화면가리개
 
     /// <summary>
     /// 하루 길이 ( 턴 )
     /// </summary>
-    int max_turn = 120;
+    int max_turn = 100;
 
     /// <summary>
     /// 카드효과로 하루동안 증가하는 턴
@@ -80,6 +82,13 @@ public class Turn_System : MonoBehaviour
         player.Turn_Action += Object_Count;
 
         image.fillAmount = 1.0f;
+
+        CreateObject(chick);
+        CreateObject(dog);
+        CreateObject(dog);
+        CreateObject(Lion);
+
+        if (difficult >= 4) CreateObject(skeleton);
     }
 
     void Object_Count()
@@ -89,17 +98,9 @@ public class Turn_System : MonoBehaviour
 
         image.fillAmount = 1 - ( (float)turn_Count / (max_turn + temp_max_turn));
 
-        if ( Turn_Count == 1)
-        {
-            int i = Random.Range(1, 11); // 0~10
-            if (i < 2) CreateObject(rare_treasure); // 1 일때만 
-            else CreateObject(treasure);              // 3~10 
 
-            CreateObject(Lion);
-            CreateObject(Lion);
-        }
 
-        if ( Turn_Count%20 == 0) // 20턴 주기로 박스 생성 10% 확률로 레어 보물상자
+        if ( Turn_Count%18 == 0) // 18턴 주기로 박스 생성 10% 확률로 레어 보물상자
         {
             int i = Random.Range(1, 11); // 0~10
 
@@ -107,14 +108,19 @@ public class Turn_System : MonoBehaviour
             else CreateObject(treasure);              // 3~10 
         }
 
-        if (Turn_Count % (50 - difficult_gen) == 0) // 50턴 주기로 사자
+        if (difficult >= 5 && Turn_Count % 65 == 0) // 5스테이지 이후 스켈레톤 등장
         {
-            // CreateObject(Lion);
+            CreateObject(skeleton);
         }
 
-        if ( Turn_Count % ( 36 - difficult_gen) == 0) // 32턴 주기로 사자
+        if ( difficult >= 2 && Turn_Count % (44 - difficult_gen * 2) == 0) // 3스테이지 이후 +  50턴 주기로 사자
         {
             CreateObject(Lion);
+        }
+
+        if ( Turn_Count % ( 30 - difficult_gen) == 0) // 30 - 하루마다 x2 턴 주기로 개
+        {
+            CreateObject(dog);
         }
 
         if (Turn_Count % 15 == 0) // 15턴 주기로 닭
@@ -182,6 +188,23 @@ public class Turn_System : MonoBehaviour
 
         // 난이도 상승
         difficult_gen++;
+        difficult++;
+
+        // 첫턴 몹 생성
+        int i = Random.Range(1, 11); // 0~10
+        if (i < 2) CreateObject(rare_treasure); // 1 일때만 
+        else CreateObject(treasure);              // 3~10 
+
+        CreateObject(chick);
+        CreateObject(chick);
+        CreateObject(chick);
+        CreateObject(dog);
+        CreateObject(dog);
+        CreateObject(dog);
+        CreateObject(Lion);
+        if (difficult >= 4) CreateObject(skeleton);
+        max_turn += 12; // 매일 12턴씩 하루가 길어짐
+
     }
 
     private void CreateObject(GameObject obj)

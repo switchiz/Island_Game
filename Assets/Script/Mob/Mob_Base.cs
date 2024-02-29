@@ -16,7 +16,7 @@ public class Mob_Base : MonoBehaviour
 
     int Mob_hp;
 
-    int Mob_Hp
+    protected int Mob_Hp
     {
         get { return Mob_hp; }
         set
@@ -42,12 +42,12 @@ public class Mob_Base : MonoBehaviour
     /// <summary>
     /// 플레이어 발견 ( true면 발견 , false면 미발견 )
     /// </summary>
-    bool player_checked = false;
+    protected bool player_checked = false;
 
     /// <summary>
     /// 빙결 시간
     /// </summary>
-    int Freeze_Duration;
+    protected int Freeze_Duration;
 
     /// <summary>
     /// 플레이어를 발견하는 범위 
@@ -57,16 +57,16 @@ public class Mob_Base : MonoBehaviour
     /// <summary>
     ///  밟고있던 땅을 기억하기 위한 임시 저장고
     /// </summary>
-    MapObject tempCell;
+    protected MapObject tempCell;
 
     /// <summary>
     ///  // 맵 오브젝트 읽어들이기
     /// </summary>
-    MapObject[] checkMap;
+    protected MapObject[] checkMap;
 
-    Player player;
+    protected Player player;
 
-    Grid_System grid_sys;
+    protected Grid_System grid_sys;
 
     private void Awake()
     {
@@ -82,7 +82,7 @@ public class Mob_Base : MonoBehaviour
     /// <summary>
     /// 플레이어가 행동할때마다 ( 매 턴마다 ) 행동할 행동
     /// </summary>
-    private void Mob_Action()
+    protected virtual void Mob_Action()
     {
         if ( Freeze_Duration > 0 )
         {
@@ -138,7 +138,7 @@ public class Mob_Base : MonoBehaviour
         }
     }
 
-    private void playerchecked() // 기본 찾기 , 몹에 따라 바뀔 수 있음.
+    protected void playerchecked() // 기본 찾기 , 몹에 따라 바뀔 수 있음.
     {
         if (Mathf.Abs(player.playerX - Mob_x) < player_insight && Mathf.Abs(player.playerZ - Mob_z) < player_insight)
         {
@@ -174,10 +174,10 @@ public class Mob_Base : MonoBehaviour
     }
 
     /// <summary>
-    /// 적을 이동시키는 메서드 / 플레이어가 1칸내라면 공격을 실행한다.
+    /// 적을 이동시키는 메서드 / 플레이어가 1칸내에 있다면 공격을 실행한다.
     /// </summary>
     /// <param name="obj"></param>
-    void moveSet(MapObject obj) // 몹에서는 이동과 동시에, 이동한 발판을 false로 만듦.
+    protected virtual void moveSet(MapObject obj) // 몹에서는 이동과 동시에, 이동한 발판을 false로 만듦.
     {
         if ( obj.x == player.playerX && obj.z == player.playerZ) // 다음 이동칸에 플레이어가 있다면 공격한다.
         {
@@ -223,12 +223,17 @@ public class Mob_Base : MonoBehaviour
             Potion_Effect_Base potion_Effect;
             potion_Effect = other.GetComponent<Potion_Effect_Base>();
 
-            Mob_Hp -= potion_Effect.Damage;
-            Debug.Log($"{potion_Effect.Damage} 피해받음");
-            Freeze_Duration += potion_Effect.Freeze;
+            Damaged(potion_Effect);
 
-            
+
         }
+    }
+
+    protected virtual void Damaged(Potion_Effect_Base potion_Effect)
+    {
+        Mob_Hp -= potion_Effect.Damage;
+        Debug.Log($"{potion_Effect.Damage} 피해받음");
+        Freeze_Duration += potion_Effect.Freeze;
     }
 
     public void StartSet(MapObject obj)

@@ -16,8 +16,6 @@ public class Camera_view : MonoBehaviour
     private void Awake()
     {
         camerainputs = new();
-        vcams = FindObjectsByType<CinemachineVirtualCamera>(FindObjectsSortMode.None);
-
 
     }
 
@@ -39,23 +37,27 @@ public class Camera_view : MonoBehaviour
         camerainputs.Camera.TopView.performed -= view_Top;
         camerainputs.Camera.Disable();
     }
-
-    private void view_Top(InputAction.CallbackContext context)
+    private void view_Player(InputAction.CallbackContext context) // 1
     {
-        vcams[0].Priority = 5;
-        vcams[1].Priority = 10;
-        vcams[2].Priority = 5;
-    }
-
-    private void view_Player(InputAction.CallbackContext context)
-    {
+        Debug.Log("플레이어 시점");
         vcams[0].Priority = 10;
         vcams[1].Priority = 5;
-        vcams[2].Priority = 5;
+        vcams[2].Priority = 4;
     }
-    private void view_Top_2(InputAction.CallbackContext context)
+
+    private void view_Top(InputAction.CallbackContext context) // 2
     {
+        Debug.Log("탑뷰 먼 시점");
         vcams[0].Priority = 5;
+        vcams[1].Priority = 10;
+        vcams[2].Priority = 4;
+    }
+
+
+    private void view_Top_2(InputAction.CallbackContext context) // 3
+    {
+        Debug.Log("탑뷰 가까운 시점");
+        vcams[0].Priority = 4;
         vcams[1].Priority = 5;
         vcams[2].Priority = 10;
     }

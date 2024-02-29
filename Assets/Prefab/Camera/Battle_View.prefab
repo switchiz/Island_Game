@@ -107,9 +107,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vcams:
-  - {fileID: 8112123609964867205, guid: e192c88629dfd68489d4bdef63552c98, type: 3}
   - {fileID: 2700325728736351081, guid: 61953a26a47522f4aa694d01116d5d3a, type: 3}
-  - {fileID: 0}
+  - {fileID: 8112123609964867205, guid: e192c88629dfd68489d4bdef63552c98, type: 3}
+  - {fileID: 6063677364273707083, guid: 520bf155b1ec7bb4b9cece51b6f9ec28, type: 3}
 --- !u!114 &5813383718453510376
 MonoBehaviour:
   m_ObjectHideFlags: 0

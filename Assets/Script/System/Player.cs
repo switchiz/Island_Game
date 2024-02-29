@@ -170,7 +170,7 @@ public class Player : MonoBehaviour
         {
             GameObject selectObj = hitInfo.collider.gameObject;
             MapObject objectkey = selectObj.gameObject.GetComponent<MapObject>();
-            if (!(playerX == objectkey.x && playerZ == objectkey.z) && (MathF.Abs(objectkey.x - playerX) <= 4) && (MathF.Abs(objectkey.z - playerZ) <= 4)) // 주위 4칸 선택가능
+            if ( (MathF.Abs(objectkey.x - playerX) <= 4) && (MathF.Abs(objectkey.z - playerZ) <= 4)) // 주위 4칸 선택가능 , 자기 자신도 선택가능
             {
                 Vector3 dir = new Vector3(objectkey.x*0.4f, objectkey.height, objectkey.z*0.4f);
                 GameObject potion = Instantiate(potion_Effect[player_Action - 1]);
@@ -194,6 +194,8 @@ public class Player : MonoBehaviour
                         playerZ = objectkey.z;
                     }
                 }
+
+
 
                 if ( shuffled )
                 PotionShake(0,3);// 하급포션 셔플
@@ -246,5 +248,18 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Potion_Effect"))
+        {
+            Potion_Effect_Base potion_Effect;
+            potion_Effect = other.GetComponent<Potion_Effect_Base>();
+
+            if ( potion_Effect.heal ) Hp++;
+            Debug.Log($"회복됨");
+
+
+        }
+    }
 
 }
