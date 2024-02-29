@@ -8,6 +8,8 @@ public class Hp_UI : MonoBehaviour
 
     Player player;
 
+    public GameObject gameOver;
+
     readonly int hp_sprite = Animator.StringToHash("Player_Hp");
 
     private void Start()
@@ -19,5 +21,11 @@ public class Hp_UI : MonoBehaviour
     void Update()
     {
         animator.SetInteger(hp_sprite, player.hp);
+
+        if ( player.Hp <= 0 )
+        {
+            gameOver.SetActive(true);
+            player.player_Action = 10;
+        }
     }
 }

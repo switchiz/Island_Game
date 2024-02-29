@@ -20,7 +20,6 @@ public class Card_Base : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         CardEffect();
-        Debug.Log("카드 이펙트 & 클릭 성공");
         turn_System.Turn_Reset();
         Destroy(this.gameObject);
     }

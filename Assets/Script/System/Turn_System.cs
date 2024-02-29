@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 using Image = UnityEngine.UI.Image;
@@ -33,7 +34,7 @@ public class Turn_System : MonoBehaviour
     /// <summary>
     /// 하루 길이 ( 턴 )
     /// </summary>
-    int max_turn = 100;
+    int max_turn = 95;
 
     /// <summary>
     /// 카드효과로 하루동안 증가하는 턴
@@ -75,9 +76,7 @@ public class Turn_System : MonoBehaviour
         player = GameManager.Instance.Player;
         grid_System = GameManager.Instance.Grid;
         checkMap = GameManager.Instance.MapObject;
-        
-
-        Debug.Log(checkMap.Length);
+    
 
         player.Turn_Action += Object_Count;
 
@@ -130,6 +129,13 @@ public class Turn_System : MonoBehaviour
 
         if ( Turn_Count == max_turn + temp_max_turn )
         {
+            if (difficult == 6) // 엔딩
+            {
+
+                SceneManager.LoadScene("EndScene");
+            }
+
+
             temp_max_turn = 0;
 
             blur.SetActive(true);

@@ -4,10 +4,8 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEditor;
-using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.InputSystem.Processors;
-using static UnityEditor.Experimental.GraphView.GraphView;
 using Random = UnityEngine.Random;
 
 public class Mob_Base : MonoBehaviour
@@ -142,7 +140,6 @@ public class Mob_Base : MonoBehaviour
     {
         if (Mathf.Abs(player.playerX - Mob_x) < player_insight && Mathf.Abs(player.playerZ - Mob_z) < player_insight)
         {
-            Debug.Log("플레이어 발견");
             player_checked = true;
         }
     }
@@ -212,7 +209,6 @@ public class Mob_Base : MonoBehaviour
     /// <exception cref="NotImplementedException"></exception>
     protected virtual void Attack()
     {
-        Debug.Log("플레이어를 공격하였다.");
         player.Hp--;
     }
 
@@ -232,7 +228,6 @@ public class Mob_Base : MonoBehaviour
     protected virtual void Damaged(Potion_Effect_Base potion_Effect)
     {
         Mob_Hp -= potion_Effect.Damage;
-        Debug.Log($"{potion_Effect.Damage} 피해받음");
         Freeze_Duration += potion_Effect.Freeze;
     }
 

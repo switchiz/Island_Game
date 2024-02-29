@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -489,6 +489,10 @@ PrefabInstance:
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 602676537}
+    - target: {fileID: 8112123609964867205, guid: e192c88629dfd68489d4bdef63552c98, type: 3}
+      propertyPath: m_StandbyUpdate
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -596,8 +600,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 602676537}
     - target: {fileID: 2700325728736351081, guid: 61953a26a47522f4aa694d01116d5d3a, type: 3}
+      propertyPath: m_LookAt
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2700325728736351081, guid: 61953a26a47522f4aa694d01116d5d3a, type: 3}
       propertyPath: m_Priority
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2700325728736351081, guid: 61953a26a47522f4aa694d01116d5d3a, type: 3}
+      propertyPath: m_StandbyUpdate
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6237147988450112342, guid: 61953a26a47522f4aa694d01116d5d3a, type: 3}
+      propertyPath: m_BindingMode
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8351117901070609454, guid: 61953a26a47522f4aa694d01116d5d3a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -643,7 +659,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player_View
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9163957985604880655, guid: 61953a26a47522f4aa694d01116d5d3a, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -667,10 +684,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 691623331459937998, guid: 7b59a9c0225a57c4e86318a1a42d36ea, type: 3}
-      propertyPath: potion_number
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1950178165190988932, guid: 7b59a9c0225a57c4e86318a1a42d36ea, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -751,33 +764,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2310481049478634071, guid: 7b59a9c0225a57c4e86318a1a42d36ea, type: 3}
-      propertyPath: potion_number
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 4305441023449029176, guid: 7b59a9c0225a57c4e86318a1a42d36ea, type: 3}
       propertyPath: m_Name
       value: Canvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 5023479494786147979, guid: 7b59a9c0225a57c4e86318a1a42d36ea, type: 3}
-      propertyPath: potion_number
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6312869605368819943, guid: 7b59a9c0225a57c4e86318a1a42d36ea, type: 3}
-      propertyPath: dog
-      value: 
-      objectReference: {fileID: 1417258215064542, guid: 7451ef01e53127446b9d7406220542f6, type: 3}
-    - target: {fileID: 6312869605368819943, guid: 7b59a9c0225a57c4e86318a1a42d36ea, type: 3}
-      propertyPath: skeleton
-      value: 
-      objectReference: {fileID: 4604758181577998818, guid: c05ede422abd608419cfb7428a071b41, type: 3}
-    - target: {fileID: 6988734001223712976, guid: 7b59a9c0225a57c4e86318a1a42d36ea, type: 3}
-      propertyPath: potion_number
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8507594663450304642, guid: 7b59a9c0225a57c4e86318a1a42d36ea, type: 3}
-      propertyPath: potion_number
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -893,6 +882,10 @@ PrefabInstance:
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 602676537}
+    - target: {fileID: 6063677364273707083, guid: 520bf155b1ec7bb4b9cece51b6f9ec28, type: 3}
+      propertyPath: m_StandbyUpdate
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8744433420520184988, guid: 520bf155b1ec7bb4b9cece51b6f9ec28, type: 3}
       propertyPath: m_Name
       value: Top_View_2

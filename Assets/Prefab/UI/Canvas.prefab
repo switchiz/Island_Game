@@ -715,7 +715,7 @@ GameObject:
   - component: {fileID: 5501302428484435995}
   - component: {fileID: 2888670119871142331}
   - component: {fileID: 8516070194550939184}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Hp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -733,7 +733,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 790346078016490969}
   m_Father: {fileID: 1950178165190988932}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
@@ -812,6 +813,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5042f7309c6d7f4793565c55e856332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameOver: {fileID: 6278834053745582003}
 --- !u!1 &1483421413320391957
 GameObject:
   m_ObjectHideFlags: 0
@@ -1127,7 +1129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   potionTypePrivate: 1
-  potion_number: 5
+  potion_number: 3
 --- !u!1 &1943572558192519875
 GameObject:
   m_ObjectHideFlags: 0
@@ -1230,7 +1232,7 @@ GameObject:
   - component: {fileID: 7572366553243305437}
   - component: {fileID: 675438873209629235}
   - component: {fileID: 4859549157649449128}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Turn_Around
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1459,7 +1461,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   potionTypePrivate: 4
-  potion_number: 5
+  potion_number: 3
 --- !u!1 &3578008712364150299
 GameObject:
   m_ObjectHideFlags: 0
@@ -1685,9 +1687,9 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6996530529531329645}
   - {fileID: 2861182654321583426}
   - {fileID: 6650041480996181422}
+  - {fileID: 6996530529531329645}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1848,7 +1850,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   potionTypePrivate: 2
-  potion_number: 5
+  potion_number: 3
 --- !u!1 &4897950326289964438
 GameObject:
   m_ObjectHideFlags: 0
@@ -1983,6 +1985,94 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &6278834053745582003
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 790346078016490969}
+  - component: {fileID: 5592145518062639295}
+  - component: {fileID: 6076992447494453817}
+  - component: {fileID: 4940071840274201053}
+  m_Layer: 0
+  m_Name: 0
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &790346078016490969
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6278834053745582003}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6996530529531329645}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 800, y: -500}
+  m_SizeDelta: {x: 2000, y: 1300}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &5592145518062639295
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6278834053745582003}
+  m_CullTransparentMesh: 1
+--- !u!114 &6076992447494453817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6278834053745582003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: f103dbc4024e82f428b6292887af9808, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!114 &4940071840274201053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6278834053745582003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dfffa16b9d819c478eda678bb6dfc0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6507231781251987148
 GameObject:
   m_ObjectHideFlags: 0
@@ -2207,7 +2297,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   potionTypePrivate: 32
-  potion_number: 20
+  potion_number: 1
 --- !u!1 &7143829078085844669
 GameObject:
   m_ObjectHideFlags: 0
@@ -2353,7 +2443,7 @@ GameObject:
   - component: {fileID: 4144133819072619202}
   - component: {fileID: 5771385498813862336}
   - component: {fileID: 6401348174324635221}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Blur
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2648,6 +2738,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3317738028172516267, guid: b0360697a08163c40a15e985a178df37, type: 3}
+      propertyPath: dog
+      value: 
+      objectReference: {fileID: 1417258215064542, guid: 7451ef01e53127446b9d7406220542f6, type: 3}
+    - target: {fileID: 3317738028172516267, guid: b0360697a08163c40a15e985a178df37, type: 3}
       propertyPath: blur
       value: 
       objectReference: {fileID: 8623130160250775006}
@@ -2655,6 +2749,10 @@ PrefabInstance:
       propertyPath: image
       value: 
       objectReference: {fileID: 4859549157649449128}
+    - target: {fileID: 3317738028172516267, guid: b0360697a08163c40a15e985a178df37, type: 3}
+      propertyPath: skeleton
+      value: 
+      objectReference: {fileID: 4604758181577998818, guid: c05ede422abd608419cfb7428a071b41, type: 3}
     - target: {fileID: 3317738028172516267, guid: b0360697a08163c40a15e985a178df37, type: 3}
       propertyPath: card.Array.size
       value: 8
@@ -2694,6 +2792,10 @@ PrefabInstance:
     - target: {fileID: 4675869543062368133, guid: b0360697a08163c40a15e985a178df37, type: 3}
       propertyPath: m_Name
       value: Object_Generate
+      objectReference: {fileID: 0}
+    - target: {fileID: 4675869543062368133, guid: b0360697a08163c40a15e985a178df37, type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

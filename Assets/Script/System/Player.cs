@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
+
 using Color = UnityEngine.Color;
 
 public class Player : MonoBehaviour
@@ -52,6 +52,7 @@ public class Player : MonoBehaviour
 
     public int hp;
 
+
     public int Hp
     {
         get { return hp; }
@@ -60,6 +61,7 @@ public class Player : MonoBehaviour
             if (hp != value)
             {
                 hp = value;
+
                 if (hp <= 0)
                 {
                     Dead();
@@ -70,7 +72,7 @@ public class Player : MonoBehaviour
 
     private void Dead()
     {
-        Debug.Log("Á×À½ ¤·¤·");
+
     }
 
     private void Awake()
@@ -218,6 +220,16 @@ public class Player : MonoBehaviour
 
     void moveSet(float x, float y, float z)
     {
+        Vector3 selfDir = new Vector3 (playerX,0,playerZ);
+        Vector3 objDir = new Vector3(x, 0, z);
+
+        Vector3 direction = (objDir - selfDir);
+        if (direction != Vector3.zero)
+        {
+            Quaternion lookRotation = Quaternion.LookRotation(direction);
+            transform.rotation = lookRotation;
+        }
+
         x *= 0.4f;
         z *= 0.4f;
         transform.position = new Vector3(x,y,z);
@@ -255,7 +267,7 @@ public class Player : MonoBehaviour
             Potion_Effect_Base potion_Effect;
             potion_Effect = other.GetComponent<Potion_Effect_Base>();
 
-            if ( potion_Effect.heal ) Hp++;
+            if ( potion_Effect.heal && Hp <= 4) Hp++;
             Debug.Log($"È¸º¹µÊ");
 
 
